@@ -81,7 +81,7 @@ export const getBlogsByUserId = createAsyncThunk(
   async (obj, thunkAPI) => {
     try {
       setTokenValues()
-      const response = await fetch(`${apiUrl}/   getBlogsByUserId/${userId}/${obj?.pageNumber}/${obj?.perPageCount}/?searchQuery=${obj?.searchValue}`, {
+      const response = await fetch(`${apiUrl}/getBlogsByUserId/${userId}/${obj?.pageNumber}/${obj?.perPageCount}/?searchQuery=${obj?.searchValue}`, {
         // method: 'GET',
         // headers
         method: "POST",

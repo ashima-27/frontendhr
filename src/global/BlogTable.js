@@ -60,7 +60,7 @@ const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, o
               </div>
             </div>
             <div className="flex justify-between items-center">
-              <h1 className="text-xl text-left capitalize font-semibold py-3">{blog?.blog_Title}</h1>
+            <NavLink to={`/blog?id=${blog?._id}`}>     <h1 className="text-xl text-left capitalize font-semibold py-3">{blog?.blog_Title}</h1></NavLink>
             </div>
             <p className="text-gray-600 mb-2 text-left capitalize text-md">{blog?.blog_description}</p>
             <div className="flex flex-row justify-between">
@@ -87,7 +87,7 @@ const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, o
               </div>
               <div className="ml-4 items-center">
                 <div className="text-sm font-medium text-gray-900">
-                  <NavLink to={'/admin'}>{blog?.user[0]?.name}</NavLink>
+                <NavLink to={`/admin/empdetails?id=${blog?.user[0]?._id}`}>{blog?.user[0]?.name}</NavLink>
                 </div>
                 <div className="text-sm text-gray-500">{blog?.user[0]?.email}</div>
                 <div className="text-sm text-gray-500">{moment(blog?.blog_CreatedOn).format("MMM Do YYYY")}</div>

@@ -14,7 +14,7 @@ const BlogDetail = ({ image, title, tags, body }) => {
   const { blogDetail, isBlogSliceFetching } = useSelector(
     (state) => state.blog
   );
-console.log("cd",blogDetail?.user[0]?.name)
+console.log("cd",blogDetail.user && blogDetail?.user[0]?.name)
   useEffect(() => {
     if (id) {
       dispatch(getBlogById({ id }));
@@ -23,11 +23,13 @@ console.log("cd",blogDetail?.user[0]?.name)
       //   dispatch(())
     };
   }, [id, dispatch]);
+
   return (
     <>
       <ToastContainer />
       {isBlogSliceFetching && <ComponentLoader />}
-      <div className="p-6 flex justify-center items-start space-y-8">
+   {blogDetail && (  
+     <div className="p-6 flex justify-center items-start space-y-8">
         <div className="bg-white shadow-2xl rounded-lg p-8 w-full max-w-7xl space-y-4">
          
       <div className="max-w-4xl mx-auto p-4">
@@ -46,17 +48,17 @@ console.log("cd",blogDetail?.user[0]?.name)
                 <img
                   className="w-12 h-12 rounded-full shadow-lg"
                   src={user}
-                  alt={blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name : 'Xyz'}
+                  alt={blogDetail.user &&  blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name : 'Xyz'}
                 />
               </div>
               <div className="ml-4">
                 <div className="text-sm font-medium text-gray-900">
-                  <NavLink to={`/blog?id=${blogDetail?.user[0]?._id}`}>
-                    {blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name :"xyz"}
+                  <NavLink to={`/blog?id=${blogDetail.user && blogDetail?.user[0]?._id}`}>
+                    {blogDetail.user && blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name :"xyz"}
                   </NavLink>
                 </div>
                 <div className="text-sm text-gray-500">
-                  {blogDetail?.user[0]?.email}
+                  {blogDetail.user &&  blogDetail?.user[0]?.email}
                 </div>
               </div>
             </div>
@@ -103,7 +105,7 @@ console.log("cd",blogDetail?.user[0]?.name)
         </div>
       </div>
       </div>
-      </div>
+      </div>)}
     </>
   );
 };

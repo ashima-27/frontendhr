@@ -59,9 +59,9 @@ const Menu = ({
 
   return (
     <header className="p-4">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
-        <div className="lg:col-span-2 lg:order-1">
-          <form className="max-w-md mx-auto lg:ml-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex flex-row items-center space-x-2">
+          <form className="flex-grow">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
@@ -106,8 +106,6 @@ const Menu = ({
               )}
             </div>
           </form>
-        </div>
-        <div className="flex justify-end lg:order-2">
           <Dropdown 
             options={options}
             onSelect={onSelect}
@@ -115,36 +113,39 @@ const Menu = ({
             isActive={isActive}
             dropName={dropName}
           />
+        </div>
+
+        <div className="flex flex-row md:justify-center space-y-2 md:space-y-0 md:space-x-2">
           <button
             onClick={onClickToggle}
             type="button"
-            className="text-black bg-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="text-black bg-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             {buttonName2}
           </button>
           <button
             onClick={onClickAddEmployee}
             type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 mx-1 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             {buttonName}
           </button>
-          {isCsv &&(
-          <CSVLink 
-            className='downloadCSV' 
-            data={employee.map((data) => ({ ...data }))}
-            headers={headersOfEmployee} 
-            filename='Employee Data'
-          >
-            <button
-              onClick={onClickDownloadEmployee}
-              type="button"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          {isCsv && (
+            <CSVLink 
+              className='downloadCSV' 
+              data={employee.map((data) => ({ ...data }))}
+              headers={headersOfEmployee} 
+              filename='Employee Data'
             >
-              Download
-            </button>
-          </CSVLink>
-        )}
+              <button
+                onClick={onClickDownloadEmployee}
+                type="button"
+                className="text-white mx-1 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                Download
+              </button>
+            </CSVLink>
+          )}
         </div>
       </div>
     </header>

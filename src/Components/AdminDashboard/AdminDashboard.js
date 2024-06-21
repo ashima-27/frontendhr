@@ -187,7 +187,7 @@ const AdminDashboard = () => {
           title={"Change Status"}
         />
       )}
-      <div className="flex flex-col md:flex-row gap-4 m-4">
+      <div className="flex flex-col gap-4 m-4 md:grid md:grid-cols-2 lg:grid-cols-4">
         <SideCard
           desc={"Total Employees"}
           count={totalEmployee}

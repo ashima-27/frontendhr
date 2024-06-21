@@ -8,7 +8,7 @@ const SideCard = ({ desc, count, backgroundColor }) => {
       style={{ backgroundColor: backgroundColor || "white" }}
     >
       <img
-        className="object-cover p-4 rounded-t-lg h-32 md:h-auto md:w-24 md:rounded-none md:rounded-l-lg"
+        className="object-cover p-4 rounded-t-lg sm:h-20 lg:h-20 md:h-32 md:h-20 md:w-20 lg:w-20 md:rounded-none md:rounded-l-lg "
         src={user}
         alt="Total Employee"
       />
