@@ -103,7 +103,7 @@ function App() {
       </div>
    
       <main className={`flex-1 ${isSidebarVisible? 'lg:ml-64' : 'w-full' }`} >
-      {(currentRouteName !== 'login' || currentRouteName !== 'forgetPassword' || currentRouteName !== 'resetPassword' )&& (
+      {(currentRouteName !== 'login' || currentRouteName !== '' || currentRouteName !== 'forgetPassword' || currentRouteName !== 'resetPassword' )&& (
   <div className={`invisible lg:visible ${isSidebarVisible ?  '':'lg:ml-20 lg:px-5  '}`}>
     <MenuBar currentRouteName={currentRouteName} toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
   </div>
