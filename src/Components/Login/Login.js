@@ -84,8 +84,8 @@ user
   return (
     <div className="flex justify-center items-center h-screen ">
     <ToastContainer/>
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Login</h2>
+    <div className="bg-white shadow-2xl rounded-lg p-6 lg:w-4/12 space-y-4">
+         <h2 className="text-2xl font-semibold mb-4">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 font-medium mb-1">Email</label>

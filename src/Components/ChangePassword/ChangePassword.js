@@ -122,7 +122,7 @@ const ChangePasswordComp = () => {
     <>
     <ToastContainer />
     <div className="flex justify-center items-center h-screen ">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+      <div className="bg-white p-8 rounded shadow-md w-96 mx-3">
         <h2 className="text-2xl font-semibold mb-4">Change Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
