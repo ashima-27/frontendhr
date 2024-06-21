@@ -29,59 +29,60 @@ console.log("cd",blogDetail.user && blogDetail?.user[0]?.name)
       <ToastContainer />
       {isBlogSliceFetching && <ComponentLoader />}
    {blogDetail && (  
-     <div className="p-6 flex justify-center items-start space-y-8">
+     <div className="p-3 flex justify-center items-start space-y-8">
         <div className="bg-white shadow-2xl rounded-lg p-8 w-full max-w-7xl space-y-4">
          
-      <div className="max-w-4xl mx-auto p-4">
+      <div className="max-w-4xl mx-auto p-2">
         <img
           src={blogDetail?.image}
           alt={blogDetail?.blog_Title}
           className="w-full h-auto object-cover rounded-md shadow-md mb-6"
         />
         <div
-          className="flex items-center mt-3 p-2"
+          className="flex items-center mt-3 justify-center"
      
         >
-          <div className="flex justify-between w-full">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <img
-                  className="w-12 h-12 rounded-full shadow-lg"
-                  src={user}
-                  alt={blogDetail.user &&  blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name : 'Xyz'}
-                />
-              </div>
-              <div className="ml-4">
-                <div className="text-sm font-medium text-gray-900">
-                  <NavLink to={`/blog?id=${blogDetail.user && blogDetail?.user[0]?._id}`}>
-                    {blogDetail.user && blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name :"xyz"}
-                  </NavLink>
-                </div>
-                <div className="text-sm text-gray-500">
-                  {blogDetail.user &&  blogDetail?.user[0]?.email}
-                </div>
-              </div>
-            </div>
+          <div className="flex flex-col md:flex-row justify-between w-full">
+  <div className="flex items-center mb-4 md:mb-0">
+    <div className="flex-shrink-0 sm:px-3">
+      <img
+        className="w-12 h-12 rounded-full shadow-lg"
+        src={user}
+        alt={blogDetail.user && blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name : 'Xyz'}
+      />
+    </div>
+    <div className="ml-4 sm:px-3">
+      <div className="text-sm font-medium text-gray-900">
+        <NavLink to={`/blog?id=${blogDetail.user && blogDetail?.user[0]?._id}`}>
+          {blogDetail.user && blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name : "xyz"}
+        </NavLink>
+      </div>
+      <div className="text-sm text-gray-500">
+        {blogDetail.user && blogDetail?.user[0]?.email}
+      </div>
+    </div>
+  </div>
 
-            <div className="flex flex-col items-end">
-              <div className="text-sm">
-                Published On{" "}
-                <b>
-                  {moment(blogDetail?.blog_CreatedOn).format("MMM Do YYYY")}
-                </b>
-              </div>
-              <div className="text-sm">
-                <b>{blogDetail?.blog_readingTime} minute(s) read</b>{" "}
-                {blogDetail?.blog_wordCount} word count
-              </div>
-            </div>
-          </div>
+  <div className="flex flex-col items-end text-right">
+    <div className="text-sm">
+      Published On{" "}
+      <b>
+        {moment(blogDetail?.blog_CreatedOn).format("MMM Do YYYY")}
+      </b>
+    </div>
+    <div className="text-sm">
+      <b>{blogDetail?.blog_readingTime} minute(s) read</b>{" "}
+      {blogDetail?.blog_wordCount} word count
+    </div>
+  </div>
+</div>
+
         </div>
         <div className="flex-grow mx-4 my-2 border-t border-gray-400"></div>
-        <h1 className="text-3xl font-bold text-left mb-2">
+        <h1 className=" text-xl lg:text-3xl font-bold text-left mb-2">
           {blogDetail?.blog_Title}
         </h1>
-        <p className="text-gray-600 mb-2 text-left font-semibold capitalize text-xl">
+        <p className="text-gray-600 mb-2 text-left font-semibold capitalize text-md lg:text-xl">
           {blogDetail?.blog_description}
         </p>
 
