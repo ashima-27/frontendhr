@@ -57,8 +57,8 @@ const UserRoutes = () => (
 
 const MainRoutes = [
   {
-    path:'/login',
-    element:<Login/>
+    path:'/*',
+   element:<Login/>
   },
   {
     path: "/admin*",
