@@ -88,9 +88,11 @@ function App() {
                   case '/admin/blogDashboard':
                     return 'Blog Dashboard';
                     case '/draftDashboard':
-                      return 'Draft Dashboard'
+                      return 'Draft Dashboard';
+                      case '/':
+                        return 'def';
       default:
-        return '';
+        return 'def';
     }
   };
 
@@ -103,12 +105,14 @@ function App() {
       </div>
    
       <main className={`flex-1 ${isSidebarVisible? 'lg:ml-64' : 'w-full' }`} >
-      {(currentRouteName !== 'login' || currentRouteName !== '' || currentRouteName !== 'forgetPassword' || currentRouteName !== 'resetPassword' )&& (
-  <div className={`invisible lg:visible ${isSidebarVisible ?  '':'lg:ml-20 lg:px-5  '}`}>
+      {(currentRouteName !== 'login' && currentRouteName !== 'def' && currentRouteName !== 'forgetPassword' && currentRouteName !== 'resetPassword') && (
+  <div className={`invisible lg:visible ${isSidebarVisible ? '': 'lg:ml-20 lg:px-5'}`}>
     <MenuBar currentRouteName={currentRouteName} toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
   </div>
- 
 )}
+
+ 
+
    <div className={`pt-8 mt-5  ${isSidebarVisible ?  '':'lg:ml-20 lg:px-5' }`}>
           <ApplicationRoutes />
         </div>
