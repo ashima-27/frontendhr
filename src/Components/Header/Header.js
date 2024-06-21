@@ -58,7 +58,7 @@ export default function Sidebar({ isSidebarVisible }) {
   }
 
   return (
-    <aside className={`w-full overflow-visible lg:block fixed lg:left-0 top-0 lg:h-screen bg-white z-10 shadow-md overflow-y-auto transition-all duration-300 ${isSidebarVisible ? 'lg:w-1/12 ' : 'w-full lg:w-64'}`} style={{backgroundColor:'#090a72f7',overflow:'visible'}}>
+    <aside className={`w-full overflow-visible lg:block fixed lg:left-0 top-0 lg:h-screen bg-white z-50 shadow-md overflow-y-auto transition-all duration-300 ${isSidebarVisible ? 'lg:w-1/12 ' : 'w-full lg:w-64'}`} style={{backgroundColor:'#090a72f7',overflow:'visible'}}>
       {/* Desktop Header */}
       <div className="hidden lg:flex items-center justify-between p-4 lg:p-6">
         <div className="flex items-center text-white">
