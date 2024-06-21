@@ -90,7 +90,7 @@ function App() {
                     case '/draftDashboard':
                       return 'Draft Dashboard'
       default:
-        return 'Home';
+        return '';
     }
   };
 
