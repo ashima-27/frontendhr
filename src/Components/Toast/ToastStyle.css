@@ -1,0 +1,55 @@
+.toastWrap{
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toastBox{
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 6px;
+    background: var(--white);
+    border: 1px solid transparent;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+/* error */
+
+.error .toastBox{
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.error .toastBox span{
+    line-height: 0;
+}
+
+.error .toastBox svg path{
+    fill: var(--red);
+}
+
+/* success */
+
+.success .toastBox{
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.success .toastBox span{
+    line-height: 0;
+}
+
+.success .toastBox svg path{
+    fill: var(--green);
+}

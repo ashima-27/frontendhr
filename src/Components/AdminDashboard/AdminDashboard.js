@@ -1,0 +1,292 @@
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTh, faTable } from "@fortawesome/free-solid-svg-icons";
+import EmployeeForm from "../../Popups/AddEmployee/AddEmployee";
+import EditEmployeeForm from "../../Popups/EditEmployee/EditEmployee";
+import DefaultPopup from "../../Popups/DefaultPopup/DefaultPopup";
+import DashboardMenu from "../../Menu/DashboardMenu/DashboardMenu";
+import SideCard from "../../global/SideCard";
+import SimpleCard from "../../global/SimpleCard";
+import TableFormat from "../../global/Table";
+import "react-toastify/dist/ReactToastify.css";
+import { 
+  clearemployeeSliceStates,
+  clearemployeeSliceData, 
+  getAllEmployee, 
+  makeActiveInactive } from "../../Redux/employee";
+import ComponentLoader from "../ComponentLoader/ComponentLoader";
+import { toast, ToastContainer } from "react-toastify";
+const AdminDashboard = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [editForm, setEditForm] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [selectedEmployee, setSelectedEmployee] = useState([]);
+  const [viewMode, setViewMode] = useState("card");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isPerPageDrop, setIsPerPageDrop] = useState(false);
+  const [perPageDropName, setPerPageDropName] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const {
+    allEmployee,
+    maleEmployee,
+    femaleEmployee,
+    newEmployee,
+    totalEmployee,
+    isemployeeSliceFetching,
+    isemployeeAddSuccess,
+    isemployeeAddError,
+    addEmployeeSuccessMessage,
+    addEmployeeErrorMessage,
+    employeeSliceErrorMessage,
+    isemployeeSliceFetchingSmall ,
+    isemployeeSliceError,
+  } = useSelector((state) => state.employee);
+  const dispatch = useDispatch();
+
+  const toggleViewMode = () => {
+    setViewMode((prevMode) => (prevMode === "card" ? "table" : "card"));
+  };
+
+  const handleEditForm = (employee) => {
+    setSelectedEmployee(employee);
+    setEditForm(true);
+  };
+
+  const handleStatusChange = (employee) => {
+    console.log("emp",employee._id)
+    setSelectedEmployee(employee);
+    setStatus(true);
+  };
+
+  const updateStatus=(emp)=>{
+    let obj={
+      id:emp._id,
+      status:emp.status
+    }
+    console.log("updtaingg..",obj)
+    dispatch(makeActiveInactive(obj))
+    setStatus(false);
+  }
+  const searchHandler = (searchValue) => {
+    const keywords = searchValue?.split(",").map((keyword) => keyword.trim());
+    setSearchQuery(searchValue);
+  };
+
+  const clearSearch = () => {
+    setSearchQuery("");
+    setCurrentPage(1);
+  };
+
+  const onChangePerPage = (obj) => {
+    console.log(obj,"object")
+    setPerPageDropName(obj.id);
+  };
+
+  const loadMore = () => {
+    dispatch(
+      getAllEmployee({
+        perPageCount: perPageDropName,
+        pageNumber: currentPage + 1,
+        searchValue: searchQuery,
+      })
+
+    );
+    setCurrentPage(currentPage + 1);
+  };
+
+  useEffect(() => {
+    let obj = {
+      searchValue: searchQuery,
+      perPageCount: perPageDropName,
+      pageNumber: currentPage,
+    };
+    console.log("obj", obj);
+    dispatch(getAllEmployee(obj));
+    return () => {
+      dispatch(clearemployeeSliceData());
+    };
+  }, [searchQuery, perPageDropName]);
+
+  
+  const successToast = () => {
+    toast.success(addEmployeeSuccessMessage, {
+      // position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3000, 
+      hideProgressBar: false, 
+      pauseOnHover: true, 
+    });
+  };
+
+  const errorToast = () => {
+    toast.error(addEmployeeErrorMessage, {
+      // position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3000,
+      hideProgressBar: false, 
+      pauseOnHover: true, 
+    });
+  };
+  useEffect(() => {
+    if (isemployeeAddSuccess) {
+      setShowForm(false);
+      successToast(); 
+    }
+    return()=>{
+       dispatch(clearemployeeSliceStates())
+    }
+  }, [isemployeeAddSuccess]);
+
+  useEffect(() => {
+    if (isemployeeAddError) {
+      errorToast(); 
+    }
+    return()=>{
+       dispatch(clearemployeeSliceStates())
+    }
+  }, [isemployeeAddError]);
+
+
+  useEffect(() => {
+    if (isemployeeSliceError) {
+      toast.error(employeeSliceErrorMessage, {
+        // position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 3000, 
+        hideProgressBar: false, 
+        pauseOnHover: true, 
+      });
+    }
+    return()=>{
+      // dispatch(clearBlogSliceStates())
+    }
+  }, [isemployeeSliceError]);
+
+
+  return (
+
+    // <div className="container m-auto py-5 h-auto">
+    <div className="p-6 flex justify-center items-start space-y-8">
+        <div className="bg-white shadow-2xl rounded-lg p-8 w-full max-w-7xl space-y-4">
+        
+      <ToastContainer />
+    {isemployeeSliceFetching && <ComponentLoader />}
+      {showForm && <EmployeeForm onCancel={() => setShowForm(false)} />}
+      {editForm && (
+        <EditEmployeeForm
+          onCancel={() => setEditForm(false)}
+          employeeDetail={selectedEmployee}
+          isemployeeSliceFetchingSmall ={isemployeeSliceFetchingSmall }
+        />
+      )}
+      {status && (
+        <DefaultPopup
+          onYes={()=>updateStatus(selectedEmployee)}
+          onCancel={() => setStatus(false)}
+          desc={"Do You want to change the status Of Employee"}
+          title={"Change Status"}
+        />
+      )}
+      <div className="flex flex-col md:flex-row gap-4 m-4">
+        <SideCard
+          desc={"Total Employees"}
+          count={totalEmployee}
+          backgroundColor="#f5bbc545"
+        />
+        <SideCard
+          desc={"New Employees"}
+          count={newEmployee}
+          backgroundColor="#add8e67d"
+        />
+        <SideCard
+          desc={"Male Employees"}
+          count={maleEmployee}
+          backgroundColor="#90ee9066"
+        />
+        <SideCard
+          desc={"Female Employees"}
+          count={femaleEmployee}
+          backgroundColor="#f0808052"
+        />
+      </div>
+      <DashboardMenu
+        employee={allEmployee}
+        searchFunction={searchHandler}
+        clearSearch={clearSearch}
+        buttonName={"Add "}
+        onClickAddEmployee={() => setShowForm(true)}
+        onClickDownloadEmployee={() => console.log("download")}
+        buttonName1={"Download"}
+        buttonName2={
+          <FontAwesomeIcon
+            size="2xl"
+            icon={viewMode === "card" ? faTable : faTh}
+            className="mr-1"
+          />
+        }
+        onClickToggle={toggleViewMode}
+        options={[
+          { name: "10", id: 10 },
+          { name: "20", id: 20 },
+          { name: "30", id: 30 },
+          { name: "Max", id: totalEmployee },
+        ]}
+        isActive={isPerPageDrop}
+        setIsActive={setIsPerPageDrop}
+        onSelect={onChangePerPage}
+        dropName={perPageDropName}
+        isCsv={true}
+      />
+      {viewMode === "card" ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
+          {allEmployee?.map((employee, index) => (
+            <SimpleCard
+              key={index}
+              employee={employee}
+              onClickEditForm={() => handleEditForm(employee)}
+              onClickStatus={() => handleStatusChange(employee)}
+             
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="overflow-scroll hide-scrollbar">
+          <table className="table-auto w-full ">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 w-1/3 ">Name</th>
+                <th className="px-4 py-2 w-1/3">Role</th>
+                <th className="px-4 py-2 w-1/3">Joining Date</th>
+                <th className="px-4 py-2 w-1/3">Phone Number</th>
+                <th className="px-4 py-2 w-1/3">Status</th>
+                <th className="px-4 py-2 w-1/3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allEmployee?.map((employee, index) => (
+                <TableFormat
+                  key={index}
+                  employee={employee}
+                  onClickEditForm={() => handleEditForm(employee)}
+                  onClickStatus={() => handleStatusChange(employee)}
+                />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {allEmployee?.length !== totalEmployee && !isemployeeSliceFetching && (
+      <button
+            id="dropdownButton"
+            data-dropdown-toggle="dropdown"
+            className="inline-block  bg-blue-500 text-gray-500 dark:text-white-400 hover:bg-blue-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+            type="button"
+            onClick={()=>loadMore()}
+          >Load More</button>
+          )}
+    </div>
+      </div>
+  );
+};
+
+export default AdminDashboard;

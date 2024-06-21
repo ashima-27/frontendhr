@@ -1,0 +1,15 @@
+/* CSS for upcoming meetings */
+.upcoming-meeting {
+    background-color: rgb(139, 235, 139);
+    color: rgb(16, 15, 15);
+  }
+  
+  /* CSS for past meetings */
+  .past-meeting {
+    background-color: rgb(237, 140, 140);
+    color: rgb(16, 16, 16);
+  }
+  .time-value:hover + .details-row {
+    display: table-row;
+    z-index: 109;
+  }
