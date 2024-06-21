@@ -68,9 +68,9 @@ export default function Sidebar({ isSidebarVisible }) {
 
       {/* Mobile Header */}
       <div className="lg:hidden flex items-center justify-between p-4 lg:p-6">
-        <div className="flex items-center">
+        <div className="flex items-center justify-around">
           <span className="text-lg font-semibold text-white ">HR</span>
-          <span className="ml-2 text-gray-500">Welcome, {name}</span>
+          <span className="ml-5 text-gray-500 ">Welcome, {name}</span>
         </div>
         <button
           className="focus:outline-none"
