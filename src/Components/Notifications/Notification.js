@@ -130,7 +130,7 @@ const NotificationsDashboard = () => {
             </svg>
           </span>
           <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">{notification.title}</h3>
-          <time className="block mb-2 text-sm font-normal leading-none text-gray-600 dark:text-gray-500">Released on December 7th, 2021</time>
+          <time className="block mb-2 text-sm font-normal leading-none text-gray-600 dark:text-gray-500">Released On {moment(notification.createdAt).format("YYYY-MM-DD")}</time>
           <p className="text-base font-normal text-gray-900 dark:text-gray-400">{notification.body}</p>
         </li>
       </ol>

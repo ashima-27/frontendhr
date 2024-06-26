@@ -316,6 +316,17 @@ const EmployeeDetails = () => {
                 Job Details
               </h6>
               <div className="flex flex-col items-start w-full mt-4">
+              <label className="text-sm  font-bold  text-black block text-left m-1 p-1">
+                     Employee Id
+                    </label>
+                    <input
+                      type="text"
+                      disabled={true}
+                      name="empId"
+                      value={editableEmployee?.empId || ""}
+                      // onChange={handleInputChange}
+                      className="py-2 w-full px-3 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600"
+                    />
                 <label
                   htmlFor="department"
                   className="text-sm  font-bold  text-black block text-left m-1 p-1"
@@ -405,16 +416,7 @@ const EmployeeDetails = () => {
                   onChange={handleInputChange}
                   className="py-2 w-full px-3 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600"
                 />
-                <label className="text-sm  font-bold  text-black block text-left m-1 p-1">
-                  Skills
-                </label>
-                <input
-                  type="text"
-                  name="qualification"
-                  value={editableEmployee?.qualification || ""}
-                  onChange={handleInputChange}
-                  className="py-2 w-full px-3 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600"
-                />
+               
                 <label className="text-sm  font-bold  text-black block text-left m-1 p-1">
                   Salary ({editableEmployee?.highSalary} -
                   {editableEmployee?.lowSalary})
@@ -506,6 +508,7 @@ const EmployeeDetails = () => {
                     name="totalLeaves"
                     value={editableEmployee?.totalLeaves || "15"}
                     // onChange={handleInputChange}
+                    disabled={true}
                     className="py-2 w-full px-3 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600"
                   />
                   <label className="text-sm  font-bold  text-black block text-left m-1 p-1">
@@ -513,9 +516,10 @@ const EmployeeDetails = () => {
                   </label>
                   <input
                     type="text"
+                    disabled={true}
                     name="usedLeaves"
                     value={editableEmployee?.leavestaken || ""}
-                    onChange={handleInputChange}
+                    // onChange={handleInputChange}
                     className="py-2 w-full px-3 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600"
                   />
                 </div>

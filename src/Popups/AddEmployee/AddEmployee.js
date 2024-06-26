@@ -9,9 +9,20 @@ import {
   getAllPositions,
   getAllProjects,
   clearAllProjects,
+  clearemployeeSliceStates,
+  clearemployeeSliceData, 
 } from "../../Redux/employee";
+import "react-toastify/dist/ReactToastify.css";
+import { toast,ToastContainer } from "react-toastify";
 const EmployeeForm = ({ onCancel }) => {
-  const { allPositions, allProjects, allDepartments } = useSelector(
+  const { allPositions, allProjects, allDepartments,isemployeeSliceFetching,
+    isemployeeAddSuccess,
+    isemployeeAddError,
+    addEmployeeSuccessMessage,
+    addEmployeeErrorMessage,
+    employeeSliceErrorMessage,
+    isemployeeSliceFetchingSmall ,
+    isemployeeSliceError, } = useSelector(
     (state) => state.employee
   );
   const dispatch = useDispatch();
@@ -85,6 +96,43 @@ const EmployeeForm = ({ onCancel }) => {
       });
     }
   };
+
+  
+  const successToast = () => {
+    toast.success(addEmployeeSuccessMessage, {
+      // position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3000, 
+      hideProgressBar: false, 
+      pauseOnHover: true, 
+    });
+  };
+
+  const errorToast = () => {
+    toast.error(addEmployeeErrorMessage, {
+      // position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 3000,
+      hideProgressBar: false, 
+      pauseOnHover: true, 
+    });
+  };
+  useEffect(() => {
+    if (isemployeeAddSuccess) {
+      onCancel()
+      successToast(); 
+    }
+    return()=>{
+       dispatch(clearemployeeSliceStates())
+    }
+  }, [isemployeeAddSuccess]);
+
+  // useEffect(() => {
+  //   if (isemployeeAddError) {
+  //     errorToast(); 
+  //   }
+  //   return()=>{
+  //      dispatch(clearemployeeSliceStates())
+  //   }
+  // }, [isemployeeAddError]);
 
   const handleNext = () => {
     setStep(step + 1);
@@ -327,6 +375,7 @@ const EmployeeForm = ({ onCancel }) => {
   }, [employee.name]);
   return (
     <>
+    <ToastContainer/>
       <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50 ">
         <div className="bg-white p-6 rounded-lg shadow-lg m-5">
           <form onSubmit={handleSubmit} enctype="multipart/form-data">
@@ -540,7 +589,7 @@ const EmployeeForm = ({ onCancel }) => {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between pt-2">
                   <button
                     type="button"
                     // disabled={!isFormValid()}
@@ -793,20 +842,20 @@ const EmployeeForm = ({ onCancel }) => {
                     )}
                   </div>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between pt-2">
                   <button
                     type="button"
                     onClick={handlePrevious}
-                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    className="text-white bg-yellow-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                   >
                     Previous
                   </button>
                   <button
                     type="button"
                     onClick={handleNext}
-                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    className="text-white bg-blue-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                   >
-                    next
+                    Next
                   </button>
                 </div>
               </>
@@ -880,7 +929,7 @@ const EmployeeForm = ({ onCancel }) => {
                   <button
                     type="button"
                     onClick={handlePrevious}
-                    className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    className="text-white bg-yellow-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                   >
                     Previous
                   </button>

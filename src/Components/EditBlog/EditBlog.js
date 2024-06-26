@@ -15,8 +15,8 @@ const EditBlog = ({ blogDetail, onCancel, onSubmit }) => {
     blog_Description: "",
     image: "",
     blog_Body: "",
-    wordCount: 0,
-    readingTime: 0,
+    wordCount: "",
+    readingTime: "",
     imagePreview: "",
     selectedTag: [],
     Draft: false,
@@ -69,7 +69,9 @@ const EditBlog = ({ blogDetail, onCancel, onSubmit }) => {
   };
 
   const handleTemplateBodyChange = (content, words) => {
+    console.log("words",words)
     const calculatedReadingTime = Math.ceil(words / 200);
+    console.log("calculatedReadingTime",calculatedReadingTime)
     const readingTime = calculatedReadingTime < 1 ? 1 : calculatedReadingTime;
     setFormData((prevData) => ({
       ...prevData,

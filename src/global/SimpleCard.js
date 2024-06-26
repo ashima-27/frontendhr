@@ -125,11 +125,11 @@ const SimpleCard = ({ employee, onClickEditForm, onClickStatus }) => {
         <div className="grid grid-cols-1 gap-3 text-sm text-gray-700 dark:text-gray-400 pt-1">
           <p>
             <strong>Employee Id:</strong>{" "}
-            {moment(employee.joiningDate).format("YYYY-MM-DD")}
+            {(employee?.empId)}
           </p>
           <p>
             <strong>Joining Date:</strong>{" "}
-            {moment(employee.joiningDate).format("YYYY-MM-DD")}
+            {moment(employee?.joiningDate).format("YYYY-MM-DD")}
           </p>
         </div>
         <div className="flex mt-4 md:mt-6 space-x-3">

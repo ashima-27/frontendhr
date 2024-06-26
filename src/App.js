@@ -68,7 +68,7 @@ function App() {
       case '/user/ticketDashboard':
         return 'Ticket Dashboard';
       case '/user/notification':
-        return 'Notification';
+        return 'All Notification';
        case '/changePassword':
          return 'Change Password';
        case '/user/raiseticket':
@@ -91,6 +91,12 @@ function App() {
                       return 'Draft Dashboard';
                       case '/':
                         return 'def';
+                        case '/admin/createBlog':
+                        return 'Create Blog';
+                        case '/blog':
+                          return 'Blog';
+                          case '/admin/sendNoti':
+                            return 'Send Notifications';
       default:
         return 'def';
     }
@@ -100,10 +106,11 @@ function App() {
 
   return (
     <div className="App flex flex-col lg:flex-row">
+          {(currentRouteName !== 'login' && currentRouteName !== 'def' &&  currentRouteName !== 'forgetPassword' && currentRouteName !== 'resetPassword') && (
      <div >
         <Sidebar isSidebarVisible={!isSidebarVisible} />
       </div>
-   
+          )}
       <main className={`flex-1 ${isSidebarVisible? 'lg:ml-64' : 'w-full' }`} >
       {(currentRouteName !== 'login' && currentRouteName !== 'def' && currentRouteName !== 'forgetPassword' && currentRouteName !== 'resetPassword') && (
   <div className={`invisible lg:visible ${isSidebarVisible ? '': 'lg:ml-20 lg:px-5'}`}>

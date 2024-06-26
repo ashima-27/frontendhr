@@ -51,7 +51,7 @@ const TableFormat = ({ employee, key,onClickEditForm, onClickStatus }) => {
   return (
    
       <tr style={{ backgroundColor: key % 2 === 0 ? "#ffffff" : "#eff2f9" }}>
-        <td className="border px-4 py-2 w-1/3">
+        <td className="border px-4 py-2  ">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <img
@@ -68,15 +68,15 @@ const TableFormat = ({ employee, key,onClickEditForm, onClickStatus }) => {
             </div>
           </div>
         </td>
+        <td className="border px-4 py-2  ">{employee.empId}</td>
+        <td className="border px-4 py-2  ">{employee.position}</td>
 
-        <td className="border px-4 py-2 w-1/3">{employee.position}</td>
-
-        <td className="border px-4 py-2 w-1/3 ">
+        <td className="border px-4 py-2   ">
           {moment(employee.joiningDate).format("YYYY-MM-DD")}
         </td>
-        <td className="border px-4 py-2 w-1/3">{employee.phoneNumber}</td>
-        <td className={`border px-4 py-2 w-1/3`}><span className={`${statusClass} text-white px-2 py-1 rounded`}>{employee?.status}</span></td>
-        <td className="border px-4 py-2 w-1/3">
+        <td className="border px-4 py-2  ">{employee.phoneNumber}</td>
+        <td className={`border px-4 py-2  `}><span className={`${statusClass} text-white px-2 py-1 rounded`}>{employee?.status}</span></td>
+        <td className="border px-4 py-2  ">
           <DropActions
             heading={
               <svg

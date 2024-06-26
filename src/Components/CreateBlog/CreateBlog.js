@@ -67,8 +67,11 @@ const CreateBlog = () => {
     dispatch(createBlog(formData))
   };
   const handleTemplateBodyChange = (content,words) => {
+     console.log("word",words)
     const calculatedReadingTime = Math.ceil(words / 200);
+    console.log("calculatedReadingTime",calculatedReadingTime)
     const readingTime = calculatedReadingTime < 1 ? 1 : calculatedReadingTime;
+    console.log(readingTime,"readingTime")
     setFormData((prevData) => ({
       ...prevData,
       blog_Body: content,

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTh, faTable } from "@fortawesome/free-solid-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
+import Select from 'react-select';
+import Cookies from "js-cookie";
 import ComponentLoader from "../ComponentLoader/ComponentLoader";
 import { toast, ToastContainer } from "react-toastify";
 import {
@@ -10,7 +12,9 @@ import {
   clearemeetingSliceData,
   getAllMeeting,
   updateMeeting,
+  getAllEmployee,
   clearemployeeSliceStates,
+  clearemployeeSliceData,
 } from "../../Redux/employee";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -27,7 +31,7 @@ const MeetingScheduler = () => {
   const [showEdit,setShowEdit]=useState(false);
   const [fromDate, setFromDate] =   useState(moment().startOf('month').format('YYYY-MM-DD'));
   const [toDate, setToDate] = useState(moment().endOf('month').format('YYYY-MM-DD'));
-
+  const email = Cookies.get("userEmail");
   const [selectedDate, setSelectedDate] = useState(
     moment().format("YYYY-MM-DD")
   );
@@ -46,9 +50,10 @@ const MeetingScheduler = () => {
   const [perPageDropName, setPerPageDropName] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedEmployees, setSelectedEmployees] = useState([]);
 
   const { allMeeting, totalMeeting,ismeetingSliceFetching,ismeetingSliceFetchingSmall ,ismeetingSliceSuccess,ismeetingSliceError
-    ,meetingSliceErrorMessage ,meetingSliceSuccessMessage
+    ,meetingSliceErrorMessage,allEmployee ,meetingSliceSuccessMessage
   } = useSelector((state) => state.employee);
   const dispatch = useDispatch();
 
@@ -80,16 +85,25 @@ const MeetingScheduler = () => {
       toast.error("End time must be later than start time.");
       return;
     }
-    const newEvent = {
-      title: meetingDetails.title,
-      startTime: startTime,
-      endTime: endTime,
-      link: meetingDetails.link,
-      date: selectedDate,
-    };
-
-    console.table("New Event:", newEvent);
-    dispatch(ScheduleMeeting(newEvent));
+  
+    const sendTo = selectedEmployees.map(emp => emp.value);
+    
+      const newEvent = {
+        title: meetingDetails.title,
+        startTime: startTime,
+        endTime: endTime,
+        link: meetingDetails.link,
+        date: selectedDate,
+        sendTo : sendTo,
+        from :email
+      };
+      console.table("New Event:", newEvent)
+      dispatch(ScheduleMeeting(newEvent));
+      setMeetingDetails('')
+   
+  };
+  const handleEmployeesChange = (selectedOptions) => {
+    setSelectedEmployees(selectedOptions);
   };
 
   const handleUpdateSubmit = (updatedMeeting) => {
@@ -106,7 +120,9 @@ const MeetingScheduler = () => {
       startTime: startTime,
       endTime: endTime,
       id:updatedMeeting.id
+
     };
+    
    console.log("updte",updatedEvent)
     dispatch(updateMeeting(updatedEvent));
     setShowModal(false);
@@ -184,6 +200,12 @@ const MeetingScheduler = () => {
     );
     setCurrentPage(currentPage + 1);
   };
+  const employeeOptions = allEmployee?.map(employee => ({
+    value: employee.email, // Use email as value for sending
+    label: `${employee.name} (${employee.email})`,
+    empdata: employee,
+    id: employee._id // Include employee id
+  }));
   useEffect(() => {
     if (viewMode === "table") {
     let obj = {  
@@ -204,6 +226,15 @@ const MeetingScheduler = () => {
   const onChangePerPage = (obj) => {
     setPerPageDropName(obj.id);
   };
+  useEffect(() => {
+    let obj = { searchValue: '', pageNumber: '1', perPageCount: '100', fromDate: '01-01-2020', toDate: '01-01-2030' };
+    // dispatch(getAlltemplate(obj));
+    dispatch(getAllEmployee(obj));
+    return (()=>{
+      dispatch(clearemployeeSliceData())
+     
+    })
+  }, []);
 
   const successToast = () => {
     toast.success(meetingSliceSuccessMessage, {
@@ -456,6 +487,17 @@ const MeetingScheduler = () => {
                           }
                         />
                       </div>
+                      <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700" htmlFor="formEmployees">Select Employees</label>
+              <Select
+                id="formEmployees"
+                options={employeeOptions}
+                isMulti
+                value={selectedEmployees}
+                onChange={handleEmployeesChange}
+                placeholder="Select employees"
+              />
+            </div>
                     </div>
                   </div>
                 </div>

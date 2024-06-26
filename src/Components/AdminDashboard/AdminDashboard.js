@@ -140,6 +140,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     if (isemployeeAddError) {
+      setShowForm(false)
       errorToast(); 
     }
     return()=>{
@@ -254,12 +255,13 @@ const AdminDashboard = () => {
           <table className="table-auto w-full ">
             <thead>
               <tr>
-                <th className="px-4 py-2 w-1/3 ">Name</th>
-                <th className="px-4 py-2 w-1/3">Role</th>
-                <th className="px-4 py-2 w-1/3">Joining Date</th>
-                <th className="px-4 py-2 w-1/3">Phone Number</th>
-                <th className="px-4 py-2 w-1/3">Status</th>
-                <th className="px-4 py-2 w-1/3">Actions</th>
+                <th className="px-4 py-2  ">Name</th>
+                <th className="px-2 py-2  ">Employee Id</th>
+                <th className="px-4 py-2  ">Role</th>
+                <th className="px-4 py-2  ">Joining Date</th>
+                <th className="px-4 py-2  ">Phone Number</th>
+                <th className="px-4 py-2  ">Status</th>
+                <th className="px-4 py-2  ">Actions</th>
               </tr>
             </thead>
             <tbody>

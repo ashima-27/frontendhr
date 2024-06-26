@@ -161,7 +161,7 @@ export const ScheduleMeeting = createAsyncThunk(
     try {
       setTokenValues()
 
-      const response = await fetch(`${apiUrl}/scheduleMeeting`, {
+      const response = await fetch(`${apiUrl}/${userId}/scheduleMeeting`, {
         method: 'POST',
         headers,
         body: JSON.stringify(obj)
@@ -439,7 +439,7 @@ const employeeSlice = createSlice({
 
     builder.addCase(getAllEmployee.fulfilled, (state, { payload }) => {
       state.isemployeeSliceFetching = false
-      state.allEmployee = [...state.allEmployee, ...payload?.Data]
+      state.allEmployee = [...state?.allEmployee, ...payload?.Data]
       state.newEmployee = [payload?.newEmployees]
       state.maleEmployee = [payload?.maleEmployees]
       state.femaleEmployee = [payload?.femaleEmployees]
@@ -460,13 +460,14 @@ const employeeSlice = createSlice({
       state.isemployeeSliceFetchingSmall = false
       state.isemployeeAddSuccess = true
       state.addEmployeeSuccessMessage = payload?.Message || 'New Employee Added !'
-      state.allEmployee = [...state.allEmployee, ...payload?.Data]
+      state.allEmployee = [...state?.allEmployee, ...payload?.Data]
       return state
     })
     builder.addCase(addEmployee.rejected, (state, { payload }) => {
       state.isemployeeSliceFetching = false
       state.isemployeeSliceFetchingSmall = false
-      state.isBlogSliceError = true
+      state.isemployeeAddError = true
+
       state.addEmployeeErrorMessage = payload?.message || 'Something Went Wrong'
     })
     builder.addCase(addEmployee.pending, (state, { payload }) => {
@@ -560,7 +561,11 @@ const employeeSlice = createSlice({
       state.ismeetingSliceFetching = false
       state.ismeetingSliceFetchingSmall = false
       state.ismeetingSliceSuccess=true
-      state.allMeeting = [...state.allMeeting, payload?.Data]
+      let Index = state.allMeeting.findIndex(
+        (blog) => blog._id === payload.Data._id
+      );
+      state.allMeeting[Index] = payload?.Data;
+   
       state.meetingSliceSuccessMessage = payload?.Message || 'Meeting updated'
       return state
     })

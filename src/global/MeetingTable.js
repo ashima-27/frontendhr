@@ -2,9 +2,10 @@ import React from "react";
 import moment from "moment";
 import { CSVLink } from "react-csv";
 import DropActions from "./DropActions";
-
+import "./meetingtable.css"
 const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore }) => {
  console.log(meetings.length,totalMeeting)
+
   return (
     <div className="mt-4 overflow-scroll hide-scrollbar">
      
@@ -16,6 +17,8 @@ const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore })
             <th className="border   px-4 py-2">Start Time</th>
             <th className="border   px-4 py-2">End Time</th>
             <th className="border   px-4 py-2">Link</th>
+            <th className="border   px-4 py-2">Scheduled By</th>
+            <th className="border   px-4 py-2">Attendes</th>
             <th className="border   px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -24,9 +27,21 @@ const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore })
             <tr key={index} style={{ backgroundColor: index % 2 !== 0 ? "#ffffff" : "#eff2f9" }}>
               <td className="border   px-4 py-2">{meeting.title}</td>
               <td className="border   px-4 py-2">{moment(meeting.date).format("YYYY-MM-DD")}</td>
-              <td className="border   px-4 py-2">{moment(meeting.startTime).format(" HH:mm")}</td>
-              <td className="border   px-4 py-2">{moment(meeting.endTime).format(" HH:mm")}</td>
+              <td className="border   px-4 py-2">{moment(meeting.startTime).format("HH:mm")}</td>
+              <td className="border   px-4 py-2">{moment(meeting.endTime).format("HH:mm")}</td>
               <td className="border   px-4 py-2">{meeting.meetLink}</td>
+              <td className="border   px-4 py-2">{meeting.from}</td>
+               <td className="border  px-4 py-2">
+        <div className="tooltip">
+          {meeting.sendTo[0]} <strong>({meeting.sendTo.length})</strong>
+          <span className="tooltiptext">
+            {meeting.sendTo.slice(0).map((email, index) => (
+              <div key={index} className="text-sm">{email}</div>
+            ))}
+          </span>
+        </div>
+      </td>
+
               <td className="border   px-4 py-2">
                 <DropActions  
                  heading={

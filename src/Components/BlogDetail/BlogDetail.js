@@ -47,7 +47,7 @@ console.log("cd",blogDetail.user && blogDetail?.user[0]?.name)
     <div className="flex-shrink-0 sm:px-3">
       <img
         className="w-12 h-12 rounded-full shadow-lg"
-        src={user}
+        src={blogDetail.user && blogDetail?.user[0]?.image || user}
         alt={blogDetail.user && blogDetail?.user[0]?.name ? blogDetail?.user[0]?.name : 'Xyz'}
       />
     </div>
