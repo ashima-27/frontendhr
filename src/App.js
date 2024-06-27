@@ -85,7 +85,7 @@ function App() {
                 return 'forgetPassword';
                 case '/resetPassword':
                   return 'resetPassword';
-                  case '/admin/blogDashboard':
+                  case '/blogDashboard':
                     return 'Blog Dashboard';
                     case '/draftDashboard':
                       return 'Draft Dashboard';

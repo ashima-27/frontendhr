@@ -11,6 +11,7 @@ import {
   ScheduleMeeting,
   clearemeetingSliceData,
   getAllMeeting,
+  getAllMeetingById,
   updateMeeting,
   getAllEmployee,
   clearemployeeSliceStates,
@@ -27,6 +28,7 @@ import MeetingDashboardMenu from "../../Menu/MeetingDashboardMenu/MeetingDashboa
 import EditMeetModal from "../../Popups/EditMeeting/EditMeeting";
 
 const MeetingScheduler = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showEdit,setShowEdit]=useState(false);
   const [fromDate, setFromDate] =   useState(moment().startOf('month').format('YYYY-MM-DD'));
@@ -60,6 +62,14 @@ const MeetingScheduler = () => {
   const toggleViewMode = () => {
     setViewMode((prevMode) => (prevMode === "card" ? "table" : "card"));
   };
+  useEffect(() => {
+    const roles = Cookies.get("role");
+    if (roles) {
+   
+      let tempRole = JSON.parse(roles);
+      setIsAdmin(tempRole?.includes("admin"));
+    }
+  }, [Cookies.get("role")]);
 
   const handleDateSelect = (arg) => {
     setShowModal(true);
@@ -86,7 +96,7 @@ const MeetingScheduler = () => {
       return;
     }
   
-    const sendTo = selectedEmployees.map(emp => emp.value);
+    const sendTo = selectedEmployees.map(emp => emp.id);
     
       const newEvent = {
         title: meetingDetails.title,
@@ -190,6 +200,7 @@ const MeetingScheduler = () => {
   };
 
   const loadMore = () => {
+    if(isAdmin){
     dispatch(
       getAllMeeting({
         perPageCount: perPageDropName,
@@ -197,7 +208,15 @@ const MeetingScheduler = () => {
         fromDate:fromDate,
       toDate:toDate,
       })
-    );
+    )}else{
+      dispatch(
+        getAllMeetingById({
+          perPageCount: perPageDropName,
+          pageNumber: currentPage + 1,
+          fromDate:fromDate,
+        toDate:toDate,
+        }))}
+    
     setCurrentPage(currentPage + 1);
   };
   const employeeOptions = allEmployee?.map(employee => ({
@@ -215,13 +234,16 @@ const MeetingScheduler = () => {
       toDate:toDate,
     };
     console.log("obj", obj);
+    if(isAdmin){
     dispatch(getAllMeeting(obj));
-
+    }else{
+      dispatch(getAllMeetingById(obj))
+    }
     return () => {
       dispatch(clearemeetingSliceData());
     };
   }
-  }, [perPageDropName,fromDate,toDate,viewMode]);
+  }, [isAdmin,perPageDropName,fromDate,toDate,viewMode]);
 
   const onChangePerPage = (obj) => {
     setPerPageDropName(obj.id);
@@ -280,12 +302,16 @@ const MeetingScheduler = () => {
         fromDate: moment().startOf('month').format('YYYY-MM-DD'),
         toDate: moment().endOf('month').format('YYYY-MM-DD'),
       };
+      if(isAdmin){
       dispatch(getAllMeeting(obj));
+      }else{
+        dispatch(getAllMeetingById(obj))
+      }
     }
     return(()=>{
       dispatch(clearemeetingSliceData())
     })
-  }, [viewMode]);
+  }, [isAdmin,viewMode]);
   return (
     <>
     <div className="px-4 py-1">
@@ -326,7 +352,7 @@ const MeetingScheduler = () => {
   <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg overflow-scroll hide-scrollbar">
      
      
-    {showEdit &&  <EditMeetModal meeting={selectedMeet} onSave={handleUpdateSubmit} isOpen={showEdit}  onClose={()=>setShowEdit(false)} ismeetingSliceFetchingSmall={ismeetingSliceFetchingSmall}/>}
+    {showEdit && isAdmin && ( <EditMeetModal meeting={selectedMeet} onSave={handleUpdateSubmit} isOpen={showEdit}  onClose={()=>setShowEdit(false)} ismeetingSliceFetchingSmall={ismeetingSliceFetchingSmall}/>)}
       {viewMode === "table" ? (
         <>
         <MeetingTable
@@ -380,7 +406,7 @@ const MeetingScheduler = () => {
       )}
 </div>
 </div>
-      {showModal && (
+      {showModal && isAdmin && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div

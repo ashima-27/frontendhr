@@ -9,6 +9,7 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
     link: "",
     id: "",
     date: "",
+    
   });
 
   useEffect(() => {

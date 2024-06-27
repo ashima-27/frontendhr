@@ -227,6 +227,32 @@ export const getAllMeeting = createAsyncThunk(
   }
 )
 
+
+export const getAllMeetingById = createAsyncThunk(
+  'employee/getAllMeetingById',
+  async (obj, thunkAPI) => {
+    console.log(apiUrl);
+    try {
+      setTokenValues()
+      const response = await fetch(`${apiUrl}/${userId}/getAllMeetingById/?pageNumber=${obj?.pageNumber}&pageCount=${obj?.perPageCount}&fromDate=${obj?.fromDate}&toDate=${obj?.toDate}`, {
+        method: "GET",
+        headers,
+        body: JSON.stringify(obj?.filters),
+      })
+      let data = await response.json()
+      if (response.status === 200) {
+        return data
+      } else {
+        return thunkAPI.rejectWithValue(data)
+      }
+    } catch (error) {
+      console.log(error, 'err')
+      return thunkAPI.rejectWithValue({ error: error.message })
+    }
+  }
+)
+
+
 export const getEmployeeById = createAsyncThunk(
   'employee/getEmployeeById',
   async (obj, thunkAPI) => {
@@ -539,6 +565,20 @@ const employeeSlice = createSlice({
       state.ismeetingSliceFetching = true
     })
 
+    builder.addCase(getAllMeetingById.fulfilled, (state, { payload }) => {
+      state.ismeetingSliceFetching = false
+      state.allMeeting = [...state.allMeeting, ...payload?.Data]
+      state.totalMeeting=payload?.totalMeeting
+      return state
+    })
+    builder.addCase(getAllMeetingById.rejected, (state, { payload }) => {
+      state.ismeetingSliceFetching = false
+      state.ismeetingSliceError = true
+      state.meetingSliceErrorMessage = payload?.message || 'Something Went Wrong'
+    })
+    builder.addCase(getAllMeetingById.pending, (state, { payload }) => {
+      state.ismeetingSliceFetching = true
+    })
     builder.addCase(ScheduleMeeting.fulfilled, (state, { payload }) => {
       state.ismeetingSliceFetching = false
        state.ismeetingSliceSuccess = true

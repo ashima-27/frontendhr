@@ -1,11 +1,23 @@
-import React from "react";
+import React ,{useEffect ,useState} from "react";
 import moment from "moment";
 import { CSVLink } from "react-csv";
 import DropActions from "./DropActions";
-import "./meetingtable.css"
+import "./meetingtable.css";
+import Cookies from "js-cookie";
 const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore }) => {
  console.log(meetings.length,totalMeeting)
-
+ const [isAdmin, setIsAdmin] = useState(false);
+ useEffect(() => {
+  const roles = Cookies.get("role");
+  if (roles) {
+ 
+    let tempRole = JSON.parse(roles);
+    setIsAdmin(tempRole?.includes("admin"));
+  }
+}, [Cookies.get("role")]);
+useEffect(()=>{
+console.log("meeutb",meetings)
+},[])
   return (
     <div className="mt-4 overflow-scroll hide-scrollbar">
      
@@ -19,7 +31,7 @@ const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore })
             <th className="border   px-4 py-2">Link</th>
             <th className="border   px-4 py-2">Scheduled By</th>
             <th className="border   px-4 py-2">Attendes</th>
-            <th className="border   px-4 py-2">Actions</th>
+         {isAdmin && ( <th className="border   px-4 py-2">Actions</th> )}
           </tr>
         </thead>
         <tbody>
@@ -29,20 +41,23 @@ const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore })
               <td className="border   px-4 py-2">{moment(meeting.date).format("YYYY-MM-DD")}</td>
               <td className="border   px-4 py-2">{moment(meeting.startTime).format("HH:mm")}</td>
               <td className="border   px-4 py-2">{moment(meeting.endTime).format("HH:mm")}</td>
-              <td className="border   px-4 py-2">{meeting.meetLink}</td>
+              <td className="border px-4 py-2">  <a href={`${meeting.meetLink}`}>{meeting.meetLink}</a></td>
               <td className="border   px-4 py-2">{meeting.from}</td>
                <td className="border  px-4 py-2">
-        <div className="tooltip">
-          {meeting.sendTo[0]} <strong>({meeting.sendTo.length})</strong>
+      {meeting &&  meeting?.userEmails && (
+       <div className="tooltip">
+          {meeting && meeting?.userEmails[0]} <strong>({meeting.userEmails.length})</strong>
           <span className="tooltiptext">
-            {meeting.sendTo.slice(0).map((email, index) => (
+            {meeting.userEmails.slice(0).map((email, index) => (
               <div key={index} className="text-sm">{email}</div>
             ))}
           </span>
-        </div>
+          
+        </div>)
+        }
       </td>
 
-              <td className="border   px-4 py-2">
+     {isAdmin && (       <td className="border   px-4 py-2">
                 <DropActions  
                  heading={
                 <svg
@@ -59,6 +74,7 @@ const MeetingTable = ({ meetings ,isLoading,totalMeeting,onClickEdit,loadMore })
              ]}
                  />
               </td>
+            )}  
             </tr>
           ))}
         </tbody>

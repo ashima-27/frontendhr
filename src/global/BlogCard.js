@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect ,useState} from "react";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -6,37 +6,20 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import DropActions from "./DropActions";
 import { NavLink } from "react-router-dom";
 import { CSVLink } from "react-csv";
+import Cookies from "js-cookie";
 import user from "../assets/images/user.png";
 const BlogCard = ({ blog, onClickEditForm, onClickStatus ,onClickDelete ,onClickDuplicate}) => {
   const statusClass = blog?.blog_isActive ? "bg-green-300" : "bg-red-300";
 
-  // const headers = [
-  //   { label: "Blog Title", key: "blog_Title" },
-  //   { label: "Blog Type", key: "blog_Type" },
-  //   { label: "Blog Description", key: "blog_description" },
-  //   { label: "Reading Time", key: "blog_readingTime" },
-  //   { label: "Word Count", key: "blog_wordCount" },
-  //   { label: "Tags", key: "tags" },
-  //   { label: "Created On", key: "blog_CreatedOn" },
-  //   { label: "Created By", key: "blog_CreatedBy" },
-  //   { label: "Is Active", key: "blog_isActive" },
-  //   { label: "Is Deleted", key: "blog_isDeleted" },
-  // ];
-
-  // const csvData = [
-  //   {
-  //     blog_Title: blog.blog_Title,
-  //     blog_Type: blog.blog_Type,
-  //     blog_description: blog.blog_description,
-  //     blog_readingTime: blog.blog_readingTime,
-  //     blog_wordCount: blog.blog_wordCount,
-  //     tags: blog.tags.join(", "),
-  //     blog_CreatedOn: moment(blog.blog_CreatedOn).format("YYYY-MM-DD"),
-  //     blog_CreatedBy: blog.blog_CreatedBy,
-  //     blog_isActive: blog.blog_isActive,
-  //     blog_isDeleted: blog.blog_isDeleted,
-  //   },
-  // ];
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    const roles = Cookies.get("role");
+    if (roles) {
+     
+      let tempRole = JSON.parse(roles);
+      setIsAdmin(tempRole?.includes("admin"));
+    }
+  }, [Cookies.get("role")]);
 
   return (
    blog && (
@@ -46,7 +29,7 @@ const BlogCard = ({ blog, onClickEditForm, onClickStatus ,onClickDelete ,onClick
         <img className="w-full" src={blog?.image} alt={blog?.blog_Title} />
 
       </div>
-      <div className="flex justify-between items-center mt-2">
+    {isAdmin && ( <div className="flex justify-between items-center mt-2">
         <div className={`flex justify-start ${statusClass}  mx-3 text-white px-2 py-1 rounded`}>
           {blog?.blog_isActive ? "Active" : "Inactive"}
         </div>
@@ -91,6 +74,7 @@ const BlogCard = ({ blog, onClickEditForm, onClickStatus ,onClickDelete ,onClick
           </button>
         </div>
       </div>
+    )} 
       <div className="p-2">
       <div className="flex justify-between items-center">
       <NavLink to={`/blog?id=${blog?._id}`}>      <h1 className="text-xl text-left capitalize font-semibold  py-3">{blog?.blog_Title}</h1>

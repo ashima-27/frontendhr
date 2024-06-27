@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import Dropdown from "../../global/Dropdown";
 import { CSVLink } from 'react-csv';
 import debounce from 'lodash.debounce'; // Add lodash.debounce for debounce functionality
-
+import Cookies from "js-cookie";
 const Menu = ({
   searchFunction,
   clearSearch,
@@ -20,7 +20,7 @@ const Menu = ({
   isCsv
 }) => {
   const [searchValue, setSearchValue] = useState("");
-
+  const [isAdmin, setIsAdmin] = useState(false);
   const debouncedSearch = useCallback(
     debounce((value) => {
       console.log("Debounced Search Value:", value);
@@ -56,6 +56,14 @@ const Menu = ({
     { label: 'Account Number', key: 'accountNumber' },
     { label: 'IFSC Code', key: 'ifscCode' }
   ];
+  useEffect(() => {
+    const roles = Cookies.get("role");
+    if (roles) {
+   
+      let tempRole = JSON.parse(roles);
+      setIsAdmin(tempRole?.includes("admin"));
+    }
+  }, [Cookies.get("role")]);
 
   return (
     <header className="p-4">
@@ -123,13 +131,13 @@ const Menu = ({
           >
             {buttonName2}
           </button>
-          <button
+      {isAdmin && (  <button
             onClick={onClickAddEmployee}
             type="button"
             className="text-white bg-blue-700 mx-1 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3   dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             {buttonName}
-          </button>
+          </button>)}  
           {isCsv && (
             <CSVLink 
               className='downloadCSV' 

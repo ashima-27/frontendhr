@@ -1,22 +1,21 @@
-import React from "react";
+import React ,{useState,useEffect }from "react";
 import moment from "moment";
 import { CSVLink } from "react-csv";
 import DropActions from "./DropActions";
 import { NavLink } from "react-router-dom";
 import user from "../assets/images/user.png";
+import Cookies from "js-cookie";
 const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, onClickDuplicate }) => {
-//   const headers = [
-//     { label: "Blog Title", key: "blog_Title" },
-//     { label: "Blog Type", key: "blog_Type" },
-//     { label: "Blog Description", key: "blog_description" },
-//     { label: "Reading Time", key: "blog_readingTime" },
-//     { label: "Word Count", key: "blog_wordCount" },
-//     { label: "Tags", key: "tags" },
-//     { label: "Created On", key: "blog_CreatedOn" },
-//     { label: "Created By", key: "blog_CreatedBy" },
-//     { label: "Is Active", key: "blog_isActive" },
-//     { label: "Is Deleted", key: "blog_isDeleted" },
-//   ];
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    const roles = Cookies.get("role");
+    if (roles) {
+     
+      let tempRole = JSON.parse(roles);
+      setIsAdmin(tempRole?.includes("admin"));
+    }
+  }, [Cookies.get("role")]);
+
 
   const getStatusClass = (isActive) => (isActive ? "bg-green-300" : "bg-red-300");
   const statusClass = blog?.blog_isActive ? "bg-green-300" : "bg-red-300";
@@ -26,6 +25,7 @@ const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, o
         <div className="w-full flex ">
         <div className="w-full flex p-4 bg-white m-4 shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-in-out">
           <div className="flex-grow ">
+          {isAdmin && (
             <div className="flex justify-between items-center mt-2">
               <div className={`flex justify-start ${statusClass} text-white px-2 py-1 rounded`}>
                 {blog?.blog_isActive ? "Active" : "Inactive"}
@@ -59,6 +59,7 @@ const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, o
                 </button>
               </div>
             </div>
+            )}
             <div className="flex justify-between items-center">
             <NavLink to={`/blog?id=${blog?._id}`}>     <h1 className="text-xl text-left capitalize font-semibold py-3">{blog?.blog_Title}</h1></NavLink>
             </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Dropdown from "../../global/Dropdown";
 import moment from "moment";
 import { CSVLink } from "react-csv";
-
+import Cookies from "js-cookie";
 const MeetingDashboardMenu = ({
   searchFunction,
   clearSearch,
@@ -27,11 +27,19 @@ const MeetingDashboardMenu = ({
   const [searchValue, setSearchValue] = useState("");
   const [startDate, setStartDate] = useState(moment().startOf('month').format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState(moment().endOf('month').format('YYYY-MM-DD'));
-
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     console.log("tyi", buttonName2.props.icon.iconName);
   }, [buttonName2]);
+  useEffect(() => {
+    const roles = Cookies.get("role");
+    if (roles) {
+   
+      let tempRole = JSON.parse(roles);
+      setIsAdmin(tempRole?.includes("admin"));
+    }
+  }, [Cookies.get("role")]);
 
   useEffect(() => {
     setFromDate(startDate);
@@ -104,12 +112,7 @@ const MeetingDashboardMenu = ({
               <div className="flex justify-center lg:order-1">
                 <form className="max-w-md mx-auto lg:ml-0 flex">
                   <div className="mr-4">
-                    {/* <label
-                      htmlFor="sd"
-                      className="text-sm text-black text-left mb-1"
-                    >
-                      Start Date
-                    </label> */}
+                 
                     <input
                       type="date"
                       name="sd"
@@ -120,12 +123,7 @@ const MeetingDashboardMenu = ({
                     />
                   </div>
                   <div>
-                    {/* <label
-                      htmlFor="ld"
-                      className="text-sm text-black text-left mb-1"
-                    >
-                      End Date
-                    </label> */}
+                  
                     <input
                       type="date"
                       name="ld"
@@ -157,14 +155,14 @@ const MeetingDashboardMenu = ({
                 >
                   {buttonName2}
                 </button>
-                <button
+           {isAdmin && (    <button
                   onClick={onClickCreateMeeting}
                   type="button"
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
                   {buttonName}
                 </button>
-
+              )} 
                 <CSVLink
                   className="downloadCSV"
                   data={csvData}

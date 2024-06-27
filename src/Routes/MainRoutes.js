@@ -36,7 +36,7 @@ const AdminRoutes = () => (
     <Route path="emaildashboard" element={<TemplateDashboard/>} />
     <Route path="sendEmail" element={<SendEmailComponent/>} />
     <Route path="recepientDashboard" element={<RecepientDashboard/>} />
-    <Route path ="blogDashboard" element={<BlogDashboard/>}/>
+    
     <Route path="createBlog" element={<CreateBlog/>}/>
     
     </Routes>
@@ -87,8 +87,11 @@ const MainRoutes = [
   {
     path:'/draftDashboard',
     element:<BlogDraft/>
+  },
+  {
+    path:'/blogDashboard',
+    element:<BlogDashboard/>
   }
-
 ];
 
 export default MainRoutes;

@@ -95,16 +95,20 @@ export default function Sidebar({ isSidebarVisible }) {
               <NavLinkWithIcon to="/admin/emaildashboard" icon={TemplateIcon} label="Templates" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/admin/recepientDashboard" icon={MailIcon} label="Sent Mails" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible} />
               <NavLinkWithIcon to="/admin/ticketDashboard" icon={TicketIcon} label="Tickets Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
-              <NavLinkWithIcon to="/admin/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+              <NavLinkWithIcon to="/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/draftDashboard" icon={DocumentDuplicateIcon} label="Draft Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
          
             </>
           )}
           {!isAdmin && (
             <>
-              <NavLinkWithIcon to="/user" icon={UserCircleIcon} label="Profile" onClick={() => setMobileMenuOpen(false)} />
-              <NavLinkWithIcon to="/user/ticketDashboard" icon={TicketIcon} label="Ticket Dashboard" onClick={() => setMobileMenuOpen(false)} />
-              <NavLinkWithIcon to="/user/notification" icon={ClipboardCheckIcon} label="Notification" onClick={() => setMobileMenuOpen(false)} />
+              <NavLinkWithIcon to="/user" icon={UserCircleIcon} label="Profile" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+              <NavLinkWithIcon to="/user/ticketDashboard" icon={TicketIcon} label="Ticket Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+              <NavLinkWithIcon to="/user/notification" icon={ClipboardCheckIcon} label="Notification" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+              <NavLinkWithIcon to="/admin/scheduleMeet" icon={CalendarIcon} label="My Meetings" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+          
+              <NavLinkWithIcon to="/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+            
             </>
           )}
         </div>
@@ -170,7 +174,8 @@ function NavLinkWithIcon({ to, icon: Icon, label, onClick ,isSidebarVisible }) {
   };
   return (
     <>
-      <div className={`relative flex items-center ${isSidebarVisible ? "justify-center " : "" }overflow-visible`} >
+      <div className={`relative flex items-center ${isSidebarVisible ? "justify-center " : "" }overflow-visible`}  onMouseLeave={handleMouseLeave}
+       onMouseEnter={handleMouseEnter} >
       <NavLink
         to={to}
         end
@@ -182,8 +187,8 @@ function NavLinkWithIcon({ to, icon: Icon, label, onClick ,isSidebarVisible }) {
               : 'text-gray-900 text-white hover:text-indigo-600 hover:bg-gray-100'
           }`
         }
-       onMouseLeave={handleMouseLeave}
-       onMouseEnter={handleMouseEnter}
+      //  onMouseLeave={handleMouseLeave}
+      //  onMouseEnter={handleMouseEnter}
       >
         <Icon className={`${isSidebarVisible ? 'h-7 w-7 ' : 'text-bold h-6 w-6 mr-4'}`} />
         <span className={`${isSidebarVisible ? 'hidden' : 'lg:inline-block'}`}>{label}</span>
