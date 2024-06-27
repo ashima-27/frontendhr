@@ -149,6 +149,10 @@ export default function Sidebar({ isSidebarVisible }) {
               <NavLinkWithIcon to="/user" icon={UserCircleIcon} label="Profile" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/user/ticketDashboard" icon={TicketIcon} label="Ticket Dashboard" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/user/notification" icon={ClipboardCheckIcon} label="Notification" onClick={() => setMobileMenuOpen(false)} />
+              <NavLinkWithIcon to="/admin/scheduleMeet" icon={CalendarIcon} label="My Meetings" onClick={() => setMobileMenuOpen(false)} />
+          
+              <NavLinkWithIcon to="/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} />
+            
             </>
           )}
         </div>
@@ -156,6 +160,7 @@ export default function Sidebar({ isSidebarVisible }) {
         <div className="bg-white border-t pt-4 pb-2" style={{backgroundColor:'#090a72f7'}}>
           <NavLinkWithIcon to="/changePassword" icon={LockClosedIcon} label="Change Password" onClick={() => setMobileMenuOpen(false)} />
           <NavLinkWithIcon to="/login" icon={LogoutIcon} label="Log out" onClick={() => { setMobileMenuOpen(false); handleLogout(); }} />
+       
         </div>
       </Dialog>
     </aside>
