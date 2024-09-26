@@ -103,7 +103,8 @@ const CreateBlog = () => {
         };
         console.log(newObj);
         console.log("Draft added!", newObj);
-        dispatch(createBlogAsDraft(newObj));
+        dispatch(createBlogAsDraft(newObj))
+        
   }
 
   useEffect(() => {
@@ -139,7 +140,7 @@ const CreateBlog = () => {
           value={formData.blog_Title}
           onChange={handleInputChange}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
-             required
+             
         />
       </div>
 
@@ -153,7 +154,7 @@ const CreateBlog = () => {
           value={formData.blog_Type}
           onChange={handleInputChange}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
-             required
+            
         />
       </div>
     
@@ -223,7 +224,7 @@ const CreateBlog = () => {
         onChange={handleInputChange}
         rows="3"
         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
-             required
+             
       ></textarea>
     </div>
 

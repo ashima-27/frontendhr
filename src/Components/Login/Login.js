@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import {NavLink} from 'react-router-dom';
+import logo from "../../assets/images/logo.png";
 const Login = () => {
 
   const {
@@ -84,11 +85,13 @@ user
   return (
     <div className="flex justify-center items-center h-screen ">
     <ToastContainer/>
-    <div className="bg-white shadow-2xl rounded-lg p-6 lg:w-4/12 space-y-4">
-         <h2 className="text-2xl font-semibold mb-4">Login</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="bg-white flex flex-col justify-center items-center shadow-2xl rounded-lg p-6 lg:w-4/12 gap-2">
+    <img src={logo} alt="logo" className=' h-10 flex justify-center items-center'/>
+         <h2 className="text-2xl font-semibold ">Welcome Back</h2>
+         <p className='mb-4'>Enter Your Credentials To Access Your Account</p>
+        <form onSubmit={handleSubmit} className='w-full'>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-medium mb-1">Email</label>
+            <label htmlFor="email" className="text-left block text-gray-700 font-medium mb-1">Email</label>
             <input 
               type="email" 
               id="email" 
@@ -97,7 +100,7 @@ user
               onChange={handleChange} 
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required 
-             
+             placeholder='Enter Email'
              
             />
       {errors.email && (
@@ -105,14 +108,14 @@ user
 )}
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 font-medium mb-1">Password</label>
+            <label htmlFor="password" className="text-left block text-gray-700 font-medium mb-1">Password</label>
             <input 
               type="password" 
               id="password" 
               name="password" 
               value={formData.password} 
               onChange={handleChange} 
-             
+              placeholder='Enter password'
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required 
             />
@@ -120,11 +123,12 @@ user
     <p className="text-red-500 text-xs mt-1">{errors.password}</p>
 )}
           </div>
-          <span className='m-2 p-2 text-sm text-gray-800'><NavLink to='/forgetPassword'>Forgot Password</NavLink></span>
+          <span className=' mb-4 p-2 text-sm text-gray-900 cursor-pointer'>Forgot Your Password ?<NavLink to='/forgetPassword' className='text-blue-600 '> Reset Password</NavLink></span>
           <button 
             type="submit" 
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            className="w-full bg-blue-500 text-white py-2 my-2  px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
              disabled={isAuthSliceFetchingSmall}
+             
           >
             {isAuthSliceFetchingSmall ? '.....' : 'Login'}
           </button>

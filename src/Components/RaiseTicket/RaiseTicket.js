@@ -141,9 +141,9 @@ const RaiseTickets = () => {
             </div>
             {(ticketDetails.type === 'leave' || ticketDetails.type === 'emergency') && (
               <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4 justify-between">
-                <div className="lg:w-1/3 md:w-full sm:w-full pr-4">
-                <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4">
-                  <label htmlFor="startDate" className="block text-sm font-semibold text-left">Start Date</label>
+                <div className="lg:w-1/2 md:w-full sm:w-full pr-4">
+                <div className="lg:flex lg:flex-row md:flex-col justify-center items-center sm:flex-col mb-4">
+                  <label htmlFor="startDate" className=" w-full md:w-3/12 block text-sm font-semibold text-left">Start Date</label>
                   <input
                   
                     type="date"
@@ -155,9 +155,9 @@ const RaiseTickets = () => {
                   />
                   </div>
                 </div>
-                <div className="lg:w-1/3 md:w-full sm:w-full">
-                <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4">
-                  <label htmlFor="endDate" className="block text-sm font-semibold text-left">End Date</label>
+                <div className="lg:w-1/2 md:w-full sm:w-full">
+                <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4 justify-center items-center">
+                  <label htmlFor="endDate" className="w-full md:w-4/12 block text-sm font-semibold text-left">End Date</label>
                   <input
                    style={{backgroundColor:'#eff2f9'}}
                     type="date"

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { clearAllSliceStates ,forgotPassword } from "../../Redux/auth"
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
+import logo from "../../assets/images/logo.png";
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -60,16 +61,23 @@ const ForgotPassword = () => {
     })
   }, [ischngeSliceError]);
 
+  useEffect(()=>{
+    if(clearAllSliceStates){
+      dispatch(clearAllSliceStates())
+    }
+  },[])
   return (
     <div className="flex justify-center items-center h-screen">
     <ToastContainer/>
-      <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Forgot Password</h2>
+      <div className="bg-white p-8 rounded shadow-md w-96 flex flex-col justify-center items-center">
+      <img src={logo} alt="logo" className=' h-10 flex justify-center items-center'/>
+   
+        <h2 className="text-2xl font-semibold my-4">Forgot Password</h2>
         {message && <p className="text-green-500 mb-4">{message}</p>}
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='w-full'>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-medium mb-1">Email</label>
+            <label htmlFor="email" className="text-left block text-gray-700 font-medium mb-1">Email</label>
             <input 
               type="email" 
               id="email" 
@@ -78,6 +86,7 @@ const ForgotPassword = () => {
               onChange={(e) => setEmail(e.target.value)} 
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required 
+              placeholder='Enter Email'
             />
           </div>
           <button 

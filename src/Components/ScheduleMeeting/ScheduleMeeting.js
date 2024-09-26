@@ -26,7 +26,7 @@ import moment from "moment-timezone";
 import MeetingTable from "../../global/MeetingTable";
 import MeetingDashboardMenu from "../../Menu/MeetingDashboardMenu/MeetingDashboardMenu";
 import EditMeetModal from "../../Popups/EditMeeting/EditMeeting";
-
+import notFound from "../../assets/images/notFound.png";
 const MeetingScheduler = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -363,6 +363,12 @@ const MeetingScheduler = () => {
           loadMore={loadMore}
           isLoading={ismeetingSliceFetching}
         />
+        {allMeeting.length === 0 && (
+          <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
+          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
+          </div>
+        )}
             {allMeeting?.length !== totalMeeting  && (
         <button
           id="dropdownButton"

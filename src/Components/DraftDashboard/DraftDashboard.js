@@ -11,7 +11,7 @@ import EditBlog from "../EditBlog/EditBlog";
 import DropActions from "../../global/DropActions";
 import DefaultPopup from "../../Popups/DefaultPopup/DefaultPopup";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-
+import notFound from "../../assets/images/notFound.png"
 const BlogDraft = () => {
   const { blogDraft } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const BlogDraft = () => {
     };
     console.log("delete..", obj);
     dispatch(deleteBlog(obj));
-    // setDeleteB(false);
+    setDeleteB(false);
   };
 
   return (
@@ -184,7 +184,12 @@ const BlogDraft = () => {
             </div>
           </div>
         ) : (
-          <p className="text-gray-600">No drafts available</p>
+          
+              <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
+          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
+          </div>
+          
         )}
       </div>
     </div>

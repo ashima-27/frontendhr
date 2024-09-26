@@ -34,6 +34,7 @@ import BlogCard from "../../global/BlogCard";
 import CreateBlog from "../CreateBlog/CreateBlog";
 import EditBlog from "../EditBlog/EditBlog";
 import BlogTable from "../../global/BlogTable";
+import notFound from "../../assets/images/notFound.png";
 const BlogDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
@@ -103,7 +104,7 @@ setDuplicate(true)
     }
     console.log("delete..",obj)
     dispatch(deleteBlog(obj))
-    // setDeleteB(false);
+    setDeleteB(false);
   }
   const duplicateBlogg=(emp)=>{
     console.log("selecetd ,",emp)
@@ -113,14 +114,14 @@ setDuplicate(true)
     }
     console.log("dplicate..",obj)
      dispatch(duplicateBlog(obj))
-    // setDuplicate(false);
+    setDuplicate(false);
   }
   const updateBlogg=(emp)=>{
     console.log("selecetd ,",emp)
    
     console.log("dplicate..",)
      dispatch(updateBlog(emp))
-    // setDuplicate(false);
+    setDuplicate(false);
   }
   const searchHandler = (searchValue) => {
     const keywords = searchValue?.split(",")?.map((keyword) => keyword.trim());
@@ -283,6 +284,14 @@ setDuplicate(true)
 
             />
           ))}
+          {allBlogs.length === 0 && (
+            
+              <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
+          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
+          </div>
+            
+          )}
         </div>
       ) : (
         <div className="">
@@ -297,7 +306,14 @@ setDuplicate(true)
                onClickDuplicate={()=>handleDuplicate(blog)}
                 />
               ))}
-          
+          {allBlogs.length === 0 && (
+         
+              <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
+          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
+          </div>
+            
+          )}
         </div>
       )}
       {allBlogs?.length !== blogCount && !isBlogSliceFetching && (

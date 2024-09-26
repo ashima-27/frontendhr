@@ -20,6 +20,7 @@ import moment from "moment";
 import "react-toastify/dist/ReactToastify.css";
 import ComponentLoader from "../ComponentLoader/ComponentLoader";
 import { toast, ToastContainer } from "react-toastify";
+import notFound from "../../assets/images/notFound.png";
 const TicketsDashboard = () => {
   const dispatch = useDispatch();
   const roles = Cookies.get("role");
@@ -345,6 +346,14 @@ const TicketsDashboard = () => {
               ))}
             </tbody>
           </table>
+          {filteredTickets.length === 0 && (
+            
+              <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
+          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
+          </div>
+            
+          )}
       
       </div>
       <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg flex  justify-center">

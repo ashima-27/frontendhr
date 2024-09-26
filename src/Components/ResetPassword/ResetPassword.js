@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 const ResetPassword = () => {
 
   const [searchParams] = useSearchParams();
@@ -115,49 +116,60 @@ const ResetPassword = () => {
   return (
     <div className="flex justify-center items-center h-screen">
     <ToastContainer/>
-      <div className="bg-white p-8 rounded shadow-md w-96">
+      <div className="bg-white p-8 rounded shadow-md w-96 flex flex-col justify-center items-center">
+      <img src={logo} alt="logo" className=' h-10 flex justify-center items-center'/>
+   
         <h2 className="text-2xl font-semibold mb-4">Reset Password</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='w-full'>
           <div className="mb-4 relative">
-            <label htmlFor="newPassword" className="block text-gray-700 font-medium mb-1">New Password</label>
+            <label htmlFor="newPassword" className="text-left block text-gray-700 font-medium mb-1">New Password</label>
+            <div className='flex flex-row justify-between items-center w-full px-3 py-2 border border-gray-300 rounded '>
             <input 
               type={showPassword ? "text" : "password"} 
               id="newPassword" 
               name="newPassword" 
               value={formData.newPassword} 
               onChange={handleChange} 
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+              className="outline-none"
+              placeholder='New Password'
               required 
             />
             <button 
               type="button" 
               onClick={toggleShowPassword}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+              className=" flex items-center text-sm leading-5"
             >
               {showPassword ? "Hide" : "Show"}
             </button>
+            </div>
             {errors.newPassword && (
               <p className="text-red-500 text-xs mt-1">{errors.newPassword}</p>
             )}
+            
           </div>
           <div className="mb-4 relative">
-            <label htmlFor="confirmNewPassword" className="block text-gray-700 font-medium mb-1">Confirm New Password</label>
+            <label htmlFor="confirmNewPassword" className="text-left block text-gray-700 font-medium mb-1">Confirm New Password</label>
+            <div className='flex flex-row justify-between items-center w-full px-3 py-2 border border-gray-300 rounded '>
+        
             <input 
               type={showConfirmPassword ? "text" : "password"} 
               id="confirmNewPassword" 
               name="confirmNewPassword" 
               value={formData.confirmNewPassword} 
               onChange={handleChange} 
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+              className="outline-none"
+              placeholder="Confirm Password"
               required 
             />
             <button 
               type="button" 
               onClick={toggleShowConfirmPassword}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+              className=" flex items-center text-sm leading-5"
             >
               {showConfirmPassword ? "Hide" : "Show"}
             </button>
+            </div>
+        
             {errors.confirmNewPassword && (
               <p className="text-red-500 text-xs mt-1">{errors.confirmNewPassword}</p>
             )}

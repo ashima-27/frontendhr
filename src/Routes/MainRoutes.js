@@ -36,7 +36,7 @@ const AdminRoutes = () => (
     <Route path="emaildashboard" element={<TemplateDashboard/>} />
     <Route path="sendEmail" element={<SendEmailComponent/>} />
     <Route path="recepientDashboard" element={<RecepientDashboard/>} />
-    
+    <Route path="resetPassword" element={<ResetPassword/>}/>
     <Route path="createBlog" element={<CreateBlog/>}/>
     
     </Routes>
@@ -47,7 +47,7 @@ const UserRoutes = () => (
   <>
   <Routes>
     <Route index element={<Profile />} />
-    {/* <Route path="raiseTicket" element={<RaiseTickets />} /> */}
+  
     <Route path="ticketDashboard" element={<TicketsDashboard />} />
     <Route path="notification" element={<NotificationsDashboard />} />
     <Route path="raiseticket" element={<RaiseTickets />} />

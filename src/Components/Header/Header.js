@@ -22,7 +22,7 @@ import Cookies from "js-cookie";
 import { logout } from "../../Redux/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
+import logo from "../../assets/images/logo.png"
 export default function Sidebar({ isSidebarVisible }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,16 +61,23 @@ export default function Sidebar({ isSidebarVisible }) {
     <aside className={`w-full overflow-visible lg:block fixed lg:left-0 top-0 lg:h-screen bg-white z-50 shadow-md overflow-y-auto transition-all duration-300 ${isSidebarVisible ? 'lg:w-1/12 ' : 'w-full lg:w-64'}`} style={{backgroundColor:'#090a72f7',overflow:'visible'}}>
       {/* Desktop Header */}
       <div className="hidden lg:flex items-center justify-between p-4 lg:p-6">
-        <div className="flex items-center text-white">
-          <span className="text-lg font-semibold">HR</span>
+        <div className="flex flex-col lg:flex-row gap-2 justify-center items-center text-white">
+        <img src={logo} alt="logo" className="w-8 h-8 rounded-sm"></img>
+          <span className={`${isSidebarVisible ? 'hidden' : 'lg:inline-block'} text-lg font-semibold`}>Infinity</span>
         </div>
       </div>
 
       {/* Mobile Header */}
-      <div className="lg:hidden flex items-center justify-between p-4 lg:p-6">
-        <div className="flex items-center justify-around">
-          <span className="text-lg font-semibold text-white ">HR</span>
-          <span className="ml-5 text-gray-500 ">Welcome, {name}</span>
+      <div className="lg:hidden flex flex-col items-center justify-between p-4 lg:p-6">
+      <div className='flex mb-4 justify-center items-center'>
+      <span className="ml-5 text-white text-left ">Welcome, {name}</span>
+      </div>
+     
+     <div className='flex flex-row justify-between w-full'>
+        <div className="flex flex-row gap-2 items-center justify-around">
+        <img src={logo} alt="logo" className="w-6 h-6 rounded-sm"></img>
+          <span className="text-lg font-semibold text-white ">Infinity</span>
+         
         </div>
         <button
           className="focus:outline-none"
@@ -82,6 +89,7 @@ export default function Sidebar({ isSidebarVisible }) {
             <MenuIcon className="h-6 w-6 text-gray-500" />
           )}
         </button>
+      </div>
       </div>
 
       {/* Sidebar Navigation */}

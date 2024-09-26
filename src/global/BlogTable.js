@@ -5,6 +5,7 @@ import DropActions from "./DropActions";
 import { NavLink } from "react-router-dom";
 import user from "../assets/images/user.png";
 import Cookies from "js-cookie";
+import noImage from "../../src/assets/images/noImage.jpg"
 const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, onClickDuplicate }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
@@ -97,7 +98,7 @@ const BlogTable = ({ blog, key ,onClickEditForm, onClickStatus, onClickDelete, o
           </div>
 
           <div className={`w-1/3 p-2 invisible lg:visible`}>
-            <img className="w-full h-full object-cover" src={blog?.image} alt={blog?.blog_Title} />
+            <img className="w-full h-full object-cover" src={blog?.image || noImage} alt={blog?.blog_Title} />
           </div>
         </div>
         </div>

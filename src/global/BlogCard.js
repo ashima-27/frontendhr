@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import Cookies from "js-cookie";
 import user from "../assets/images/user.png";
+import noImage from "../assets/images/noImage.jpg"
 const BlogCard = ({ blog, onClickEditForm, onClickStatus ,onClickDelete ,onClickDuplicate}) => {
   const statusClass = blog?.blog_isActive ? "bg-green-300" : "bg-red-300";
 
@@ -26,7 +27,7 @@ const BlogCard = ({ blog, onClickEditForm, onClickStatus ,onClickDelete ,onClick
     <div className="w-full  max-w-sm  bg-white shadow-xl   hover:shadow-2xl transition-shadow duration-300 ease-in-out">
      
       <div>
-        <img className="w-full" src={blog?.image} alt={blog?.blog_Title} />
+        <img className="w-full h-56 object-contain" src={blog?.image || noImage} alt={blog?.blog_Title} />
 
       </div>
     {isAdmin && ( <div className="flex justify-between items-center mt-2">

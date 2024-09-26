@@ -126,7 +126,7 @@ const ChangePasswordComp = () => {
         <h2 className="text-2xl font-semibold mb-4">Change Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 relative">
-            <label htmlFor="currentPassword" className="block text-gray-700 font-medium mb-1">Current Password</label>
+            <label htmlFor="currentPassword" className="block text-left text-gray-700 font-medium mb-1">Current Password</label>
             <input 
               type={showPasswords.currentPassword ? "text" : "password"} 
               id="currentPassword" 
@@ -135,6 +135,7 @@ const ChangePasswordComp = () => {
               onChange={handleChange} 
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required 
+              placeholder='Enter Current Password'
             />
             <span 
               onClick={() => toggleShowPassword("currentPassword")}
@@ -147,7 +148,7 @@ const ChangePasswordComp = () => {
             )}
           </div>
           <div className="mb-4 relative">
-            <label htmlFor="newPassword" className="block text-gray-700 font-medium mb-1">New Password</label>
+            <label htmlFor="newPassword" className="block text-left text-gray-700 font-medium mb-1">New Password</label>
             <input 
               type={showPasswords.newPassword ? "text" : "password"} 
               id="newPassword" 
@@ -156,6 +157,7 @@ const ChangePasswordComp = () => {
               onChange={handleChange} 
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required 
+              placeholder='Enter New Password'
             />
             <span 
               onClick={() => toggleShowPassword("newPassword")}
@@ -168,7 +170,7 @@ const ChangePasswordComp = () => {
             )}
           </div>
           <div className="mb-4 relative">
-            <label htmlFor="confirmNewPassword" className="block text-gray-700 font-medium mb-1">Confirm New Password</label>
+            <label htmlFor="confirmNewPassword" className="block text-left text-gray-700 font-medium mb-1">Confirm New Password</label>
             <input 
               type={showPasswords.confirmNewPassword ? "text" : "password"} 
               id="confirmNewPassword" 
@@ -177,6 +179,8 @@ const ChangePasswordComp = () => {
               onChange={handleChange} 
               className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
               required 
+
+              placeholder='Enter Confirm Password'
             />
             <span 
               onClick={() => toggleShowPassword("confirmNewPassword")}

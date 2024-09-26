@@ -18,6 +18,7 @@ import {
   makeActiveInactive } from "../../Redux/employee";
 import ComponentLoader from "../ComponentLoader/ComponentLoader";
 import { toast, ToastContainer } from "react-toastify";
+import notFound from "../../assets/images/notFound.png";
 const AdminDashboard = () => {
   const [showForm, setShowForm] = useState(false);
   const [editForm, setEditForm] = useState(false);
@@ -249,6 +250,11 @@ const AdminDashboard = () => {
              
             />
           ))}
+          {allEmployee.length === 0 &&
+          <div className="">
+          <img src={notFound} alt="notFound" className="w-20 h-20"/>
+          </div>
+          }
         </div>
       ) : (
         <div className="overflow-scroll hide-scrollbar">
@@ -273,8 +279,15 @@ const AdminDashboard = () => {
                   onClickStatus={() => handleStatusChange(employee)}
                 />
               ))}
+             
             </tbody>
           </table>
+          {allEmployee.length === 0 && (
+              <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
+          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
+          </div>
+        )}
         </div>
       )}
       {allEmployee?.length !== totalEmployee && !isemployeeSliceFetching && (
