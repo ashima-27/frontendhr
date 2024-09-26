@@ -103,7 +103,7 @@ function App() {
   };
 
   const currentRouteName = getRouteName(location.pathname);
-
+  
   return (
     <div className="App flex flex-col lg:flex-row">
           {(currentRouteName !== 'login' && currentRouteName !== 'def' &&  currentRouteName !== 'forgetPassword' && currentRouteName !== 'resetPassword') && (
@@ -120,8 +120,8 @@ function App() {
 
  
 
-   <div className={`pt-8 mt-5  ${isSidebarVisible ?  '':'lg:ml-20 lg:px-5' }`}>
-          <ApplicationRoutes />
+<div className={`pt-8 mt-5  ${isSidebarVisible || currentRouteName === 'login' || currentRouteName === 'forgetPassword' || currentRouteName === 'resetPassword' ?  '' : 'lg:ml-20 lg:px-5' }`}>
+<ApplicationRoutes />
         </div>
       </main>
     </div>

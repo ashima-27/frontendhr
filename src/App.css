@@ -2,8 +2,8 @@
   text-align: center;
   background-color: #eff2f9;
   min-height: 93vh;
-  display: flex; 
-  flex-direction: column; 
+  width: 100%;
+ 
   /* justify-content: center;  */
 }
 
@@ -47,3 +47,4 @@ body{
   padding: 0;
   box-sizing: border-box;
 }
+
