@@ -83,9 +83,9 @@ user
   }, [isAuthSliceError])
 
   return (
-    <div className="flex justify-center items-center h-screen ">
+    <div className="flex flex-col justify-center items-center w-11/12 h-full ">
     <ToastContainer/>
-    <div className="bg-white flex flex-col justify-center items-center shadow-2xl rounded-lg p-6 lg:w-4/12 gap-2">
+    <div className="bg-white flex h-full flex-col justify-center items-center shadow-2xl rounded-lg p-6 lg:w-4/12 gap-2 m-4">
     <img src={logo} alt="logo" className=' h-10 flex justify-center items-center'/>
          <h2 className="text-2xl font-semibold ">Welcome Back</h2>
          <p className='mb-4'>Enter Your Credentials To Access Your Account</p>

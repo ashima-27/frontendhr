@@ -15,7 +15,7 @@ const EmailTemplateForm = () => {
   const [templateDetails, setTemplateDetails] = useState({
     title: '',
     placeholder: '',
-    status: '',
+    status: true,
     description: '',
     template:'',
   });
@@ -39,7 +39,7 @@ const EmailTemplateForm = () => {
     setTemplateDetails({
         title: '',
         placeholder: '',
-        status: '',
+        status: true,
         description: '',
         template:'',
     })

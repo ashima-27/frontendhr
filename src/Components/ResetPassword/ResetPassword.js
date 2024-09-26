@@ -114,7 +114,7 @@ const ResetPassword = () => {
 
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center w-11/12">
     <ToastContainer/>
       <div className="bg-white p-8 rounded shadow-md w-96 flex flex-col justify-center items-center">
       <img src={logo} alt="logo" className=' h-10 flex justify-center items-center'/>
