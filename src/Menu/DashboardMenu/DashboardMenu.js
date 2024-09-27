@@ -116,27 +116,10 @@ const Menu = ({
           
         </div>
 
-        <div className="flex flex-col sm:flex-row  justify-around md:justify-end items-end gap-2 w-full md:w-8/12">
-
-        <div className="flex flex-row gap-2 w-full  md:w-6/12 justify-center md:justify-end">
-        <Dropdown
-            options={options}
-            onSelect={onSelect}
-            setIsActive={setIsActive}
-            isActive={isActive}
-            dropName={dropName}
-          />
-          <button
-            onClick={onClickToggle}
-            type="button"
-            className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          >
-            {buttonName2}
-          </button>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-2 w-full md:w-6/12">
+        <div className="flex flex-col sm:flex-row  justify-end md:justify-end items-end gap-2 w-full md:w-8/12">
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-6/12 justify-center items-center">
           {isAdmin && (
-            <div className="w-full sm:w-6/12">
+            <div className="w-full sm:w-6/12 flex md:justify-end justify-center ">
             <button
               onClick={onClickAddEmployee}
               type="button"
@@ -165,6 +148,23 @@ const Menu = ({
             </div>
           )}
         </div>
+        <div className="flex flex-row gap-2 w-full  md:w-6/12 justify-center items-center">
+        <Dropdown
+            options={options}
+            onSelect={onSelect}
+            setIsActive={setIsActive}
+            isActive={isActive}
+            dropName={dropName}
+          />
+          <button
+            onClick={onClickToggle}
+            type="button"
+            className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >
+            {buttonName2}
+          </button>
+          </div>
+          
         </div>
       </div>
     </header>
