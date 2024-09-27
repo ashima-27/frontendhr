@@ -10,16 +10,16 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
     console.log("word count", words);
     setWordCount(words);
     console.log("content", content);
-    onChange(content, words); // Pass the content to the parent component
-    autoResize(); // Call autoResize after handling content change
+    onChange(content, words); 
+    autoResize(); 
   };
 
   // Auto-resize function
   const autoResize = () => {
     if (editorRef.current) {
       const editor = editorRef.current;
-      const newHeight = editor.getBody().scrollHeight; // Get the height of the content
-      editor.getContainer().style.height = `${newHeight + 20}px`; // Set the new height with some padding
+      const newHeight = Math.max(editor.getBody().scrollHeight + 20, 400);
+      editor.getContainer().style.height = `${newHeight + 20}px`; 
     }
   };
 
@@ -39,7 +39,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
       };
       reader.readAsDataURL(file);
     };
-    input.click(); // Trigger the file input dialog
+    input.click(); 
   };
 
   return (

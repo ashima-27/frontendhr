@@ -215,7 +215,7 @@ const TicketsDashboard = () => {
             endDate={endDate}
             setEndDate={setEndDate}
             isCreate={isAdmin ? false :true}
-            isCreateLink={"raiseticket"}
+            isCreateLink={"/raiseticket"}
             isCreateName={"Raise Ticket"}
           />
         </div>

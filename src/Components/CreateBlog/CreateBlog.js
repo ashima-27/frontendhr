@@ -140,7 +140,7 @@ const CreateBlog = () => {
           value={formData.blog_Title}
           onChange={handleInputChange}
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
-             
+             placeholder="Enter Blog Title"
         />
       </div>
 
@@ -153,6 +153,7 @@ const CreateBlog = () => {
           name="blog_Type"
           value={formData.blog_Type}
           onChange={handleInputChange}
+          placeholder="Enter Blog Type"
           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
             
         />
@@ -224,7 +225,7 @@ const CreateBlog = () => {
         onChange={handleInputChange}
         rows="3"
         className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
-             
+        placeholder="Enter Blog Description"
       ></textarea>
     </div>
 
@@ -234,7 +235,7 @@ const CreateBlog = () => {
       <div className="lg:w-2/3 md:w-full sm:w-full">
       <TinyEditor
         onChange={handleTemplateBodyChange}
-        initialValue={formData.blog_Body}
+        initialValue={formData.blog_Body || 'Enter Blog'}
         style={{ backgroundColor: '#eff2f9' }}
       />
       </div>
