@@ -69,9 +69,9 @@ export default function Sidebar({ isSidebarVisible }) {
 
       {/* Mobile Header */}
       <div className="lg:hidden flex flex-col items-center justify-between p-4 lg:p-6">
-      <div className='flex mb-4 justify-center items-center'>
+      {/* <div className='flex mb-4 justify-center items-center'>
       <span className="ml-5 text-white text-left ">Welcome, {name}</span>
-      </div>
+      </div> */}
      
      <div className='flex flex-row justify-between w-full'>
         <div className="flex flex-row gap-2 items-center justify-around">
