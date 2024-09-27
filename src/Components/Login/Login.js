@@ -176,7 +176,12 @@ const Login = () => {
             >
               {isAuthSliceFetchingSmall ? "....." : "Login"}
             </button>
+           
           </form>
+          <div className="flex w-full flex-col gap-2 ">
+            <small> Admin : (duggalashima905@gmail.com , password:ashima123)</small>
+            <small> User : (kaurshnaya8@gmail.com , password:ashima123)</small>
+            </div>
         </div>
       </div>
       
