@@ -294,7 +294,7 @@ const AdminDashboard = () => {
       <button
             id="dropdownButton"
             data-dropdown-toggle="dropdown"
-            className="inline-block  bg-blue-500 text-gray-500 dark:text-white-400 hover:bg-blue-100 dark:hover:bg-gray-700  focus:outline-none dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+            className="inline-block  bg-blue-500 text-white dark:text-white-400 hover:bg-blue-100 dark:hover:bg-gray-700  focus:outline-none dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
             type="button"
             onClick={()=>loadMore()}
           >Load More</button>
