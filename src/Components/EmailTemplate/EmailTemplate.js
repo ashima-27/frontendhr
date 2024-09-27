@@ -157,6 +157,7 @@ const EmailTemplateForm = () => {
                 </label>
                 <textarea
                   id="description"
+                  rows={5}
                   name="description"
                   value={templateDetails.description}
                   onChange={handleInputChange}
@@ -172,6 +173,7 @@ const EmailTemplateForm = () => {
                   Placeholders
                 </label>
                 <textarea
+                rows={5}
                   readOnly
                   id="placeholder"
                   name="placeholder"
