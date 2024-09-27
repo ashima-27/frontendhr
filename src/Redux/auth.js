@@ -147,7 +147,7 @@ const initialStateValues = {
   authSliceErrorMessage: "",
   authSliceSuccessMessage:"",
   isAuthSliceFetchingSmall:false,
-
+  isAuthenticated:false,
   ischngeSliceSuccess:false,
   ischngeSliceSuccessMessage:'',
   ischngeSliceError:false,
@@ -177,6 +177,7 @@ const authSlice = createSlice({
       state.isAuthSliceFetching = false;
       state.isAuthSliceFetchingSmall=false;
       state.isAuthSliceSuccess = true;
+      state.isAuthenticated=true;
       state.user=payload?.Data;
       console.log("us",state.user,payload?.Data)
       return state;

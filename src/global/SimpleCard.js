@@ -55,9 +55,9 @@ const SimpleCard = ({ employee, onClickEditForm, onClickStatus }) => {
       style={{ backgroundColor: "#bdccd826" }}
       className="w-full m-2 max-w-sm bg-white border p-2 rounded-lg  dark:border-gray-700 border border-gray-200 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out "
     >
-      <div className="flex justify-between items-center">
+      <div className="flex flex-row flex-wrap justify-between items-center">
         <div
-          className={`flex justify-start ${statusClass} text-white px-2 py-1 rounded`}
+          className={`flex justify-start ${statusClass} text-xs md:text-md text-white px-2 py-1 rounded`}
         >
           {employee.status}
         </div>
@@ -65,7 +65,7 @@ const SimpleCard = ({ employee, onClickEditForm, onClickStatus }) => {
           <button
             id="dropdownButton"
             data-dropdown-toggle="dropdown"
-            className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+            className="inline-block text-xs md:text-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 rounded-lg text-sm p-1.5 focus:outline-none"
             type="button"
           >
             <span className="sr-only">Open dropdown</span>
@@ -110,19 +110,19 @@ const SimpleCard = ({ employee, onClickEditForm, onClickStatus }) => {
 
       <div className="flex flex-col items-center pb-10">
         <img
-          className="w-24 h-24 mb-3 rounded-full shadow-lg"
+          className="w-16 h-16 md:w-24 md:h-24 mb-3 rounded-full shadow-lg"
           src={employee.image ? employee.image :user}
           alt={employee.name}
         />
      <NavLink to={`/admin/empdetails?id=${employee._id}`}>
-          <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+          <h5 className="mb-1 text-md md:text-xl font-medium text-gray-900 dark:text-white">
             {employee.name}
           </h5>
         </NavLink>
-        <span className="text-sm text-gray-500 dark:text-gray-400 rounded-full bg-gray-200 px-2 py-1">
+        <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400 rounded-full bg-gray-200 px-2 py-1">
           {employee.position}
         </span>
-        <div className="grid grid-cols-1 gap-3 text-sm text-gray-700 dark:text-gray-400 pt-1">
+        <div className="grid grid-cols-1 gap-3 text-xs md:text-sm  text-gray-700 dark:text-gray-400 pt-1">
           <p>
             <strong>Employee Id:</strong>{" "}
             {(employee?.empId)}
@@ -132,7 +132,7 @@ const SimpleCard = ({ employee, onClickEditForm, onClickStatus }) => {
             {moment(employee?.joiningDate).format("YYYY-MM-DD")}
           </p>
         </div>
-        <div className="flex mt-4 md:mt-6 space-x-3">
+        <div className="flex flex-row flex-wrap gap-2 mt-4 md:mt-6 justify-center items-center ">
           <div className="flex items-center space-x-2">
             <a
               href={`tel:${employee.phoneNumber}`}

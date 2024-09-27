@@ -1,97 +1,169 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import AdminDashboard from "../Components/AdminDashboard/AdminDashboard";
-import EmployeeForm from "../Popups/AddEmployee/AddEmployee";
-import SendNotification from "../Components/SendNotification/SendNotification";
-import MeetingScheduler from "../Components/ScheduleMeeting/ScheduleMeeting";
-import RaiseTickets from "../Components/RaiseTicket/RaiseTicket";
-import TicketsDashboard from "../Components/TicketDashboard/TicketDashboard";
-import NotificationsDashboard from "../Components/Notifications/Notification";
-import EmployeeDetails from "../Components/EmpDetails/EmpDetails";
-import Login from "../Components/Login/Login";
-import Profile from "../Components/Profile/Profile";
-import EmailTemplateForm from "../Components/EmailTemplate/EmailTemplate";
-import TemplateDashboard from "../Components/TemplateDashboard/TemplateDashboard";
-import SendEmailComponent from "../Components/SendEmail/SendEmail";
-import RecepientDashboard from "../Components/RecepientDashboard/RecepientDashboard";
-import ChangePassword from "../Components/ChangePassword/ChangePassword";
-import ForgotPassword from "../Components/ForgetPassword/ForgetPassword";
-import ResetPassword from "../Components/ResetPassword/ResetPassword";
-import BlogDashboard from "../Components/BlogDashboard/BlogDashboard";
-import CreateBlog from "../Components/CreateBlog/CreateBlog";
-import BlogDetail from "../Components/BlogDetail/BlogDetail";
-import BlogDraft from "../Components/DraftDashboard/DraftDashboard";
+import React, { lazy } from "react";
+import PrivateRoute from "./PrivateRoute";
 
-const AdminRoutes = () => (
-  <>
-   <Routes>
-    <Route index element={<AdminDashboard />} />
-    <Route path="addEmployee" element={<EmployeeForm />} />
-    <Route path="sendNoti" element={<SendNotification />} />
-    <Route path="scheduleMeet" element={<MeetingScheduler />} />
-    <Route path="ticketDashboard" element={<TicketsDashboard />} />
-    <Route path="notification" element={<NotificationsDashboard />} />
-    <Route path="empdetails" element={<EmployeeDetails />} />
-    <Route path="emailform" element={<EmailTemplateForm/>} />
-    <Route path="emaildashboard" element={<TemplateDashboard/>} />
-    <Route path="sendEmail" element={<SendEmailComponent/>} />
-    <Route path="recepientDashboard" element={<RecepientDashboard/>} />
-    <Route path="resetPassword" element={<ResetPassword/>}/>
-    <Route path="createBlog" element={<CreateBlog/>}/>
-    
-    </Routes>
-  </>
-);
+// Lazy load all components
+const AdminDashboard = lazy(() => import("../Components/AdminDashboard/AdminDashboard"));
+const EmployeeForm = lazy(() => import("../Popups/AddEmployee/AddEmployee"));
+const SendNotification = lazy(() => import("../Components/SendNotification/SendNotification"));
+const MeetingScheduler = lazy(() => import("../Components/ScheduleMeeting/ScheduleMeeting"));
+const RaiseTickets = lazy(() => import("../Components/RaiseTicket/RaiseTicket"));
+const TicketsDashboard = lazy(() => import("../Components/TicketDashboard/TicketDashboard"));
+const NotificationsDashboard = lazy(() => import("../Components/Notifications/Notification"));
+const EmployeeDetails = lazy(() => import("../Components/EmpDetails/EmpDetails"));
+const Login = lazy(() => import("../Components/Login/Login"));
+const Profile = lazy(() => import("../Components/Profile/Profile"));
+const ChangePassword = lazy(() => import("../Components/ChangePassword/ChangePassword"));
+const ForgotPassword = lazy(() => import("../Components/ForgetPassword/ForgetPassword"));
+const ResetPassword = lazy(() => import("../Components/ResetPassword/ResetPassword"));
+const EmailTemplateForm = lazy(() => import("../Components/EmailTemplate/EmailTemplate"));
+const TemplateDashboard = lazy(() => import("../Components/TemplateDashboard/TemplateDashboard"));
+const SendEmailComponent = lazy(() => import("../Components/SendEmail/SendEmail"));
+const RecepientDashboard = lazy(() => import("../Components/RecepientDashboard/RecepientDashboard"));
+const CreateBlog = lazy(() => import("../Components/CreateBlog/CreateBlog"));
+const BlogDetail = lazy(() => import("../Components/BlogDetail/BlogDetail"));
+const BlogDraft = lazy(() => import("../Components/DraftDashboard/DraftDashboard"));
+const BlogDashboard = lazy(() => import("../Components/BlogDashboard/BlogDashboard"));
 
-const UserRoutes = () => (
-  <>
-  <Routes>
-    <Route index element={<Profile />} />
+const AdminRoutes = [
+  {
+    path: "/admin",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <AdminDashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/addEmployee",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <EmployeeForm />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/sendNoti",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <SendNotification />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/scheduleMeet",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <MeetingScheduler />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/ticketDashboard",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <TicketsDashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/notification",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <NotificationsDashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/empdetails",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <EmployeeDetails />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/emailform",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <EmailTemplateForm />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/emaildashboard",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <TemplateDashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/sendEmail",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <SendEmailComponent />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/recepientDashboard",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <RecepientDashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/createBlog",
+    element: (
+      <PrivateRoute requiredRole="admin">
+        <CreateBlog />
+      </PrivateRoute>
+    ),
+  },
+ 
+];
+
+const UserRoutes = [
+  {
+    path: "/user",
+    element: (
+      <PrivateRoute requiredRole="user">
+        <Profile />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/user/ticketDashboard",
+    element: (
+      <PrivateRoute requiredRole="user">
+        <TicketsDashboard />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/user/notification",
+    element: (
+      <PrivateRoute requiredRole="user">
+        <NotificationsDashboard />
+      </PrivateRoute>
+    ),
+  },
   
-    <Route path="ticketDashboard" element={<TicketsDashboard />} />
-    <Route path="notification" element={<NotificationsDashboard />} />
-    <Route path="raiseticket" element={<RaiseTickets />} />
-    </Routes>
-  </>
-);
+];
 
 const MainRoutes = [
-  {
-    path:'/*',
-   element:<Login/>
+  { path: "/", element: <Login /> },
+  { path: "/changePassword", element: <ChangePassword /> },
+  { path: "/forgetPassword", element: <ForgotPassword /> },
+  { path: "/resetPassword", element: <ResetPassword /> },
+  { path: "/blog", element: <BlogDetail /> },
+  { path: "/draftDashboard", element: <BlogDraft /> },
+  { path: "/blogDashboard", element: <BlogDashboard /> },
+  {    path: "/raiseticket", element:       <RaiseTickets />   
   },
-  {
-    path: "/admin*",
-    element: <AdminRoutes />,
-  },
-  {
-    path: "/user*",
-    element: <UserRoutes />,
-  },
-  {
-    path:'changePassword',
-    element:<ChangePassword/>
-  },
-  {
-    path:'forgetPassword',
-    element:<ForgotPassword/>
-  },
-  {
-    path:'resetPassword',
-    element:<ResetPassword/>
-  },
-  {
-    path:'blog',
-    element:<BlogDetail/>
-  },
-  {
-    path:'/draftDashboard',
-    element:<BlogDraft/>
-  },
-  {
-    path:'/blogDashboard',
-    element:<BlogDashboard/>
-  }
+  ...AdminRoutes,
+  ...UserRoutes,
 ];
 
 export default MainRoutes;

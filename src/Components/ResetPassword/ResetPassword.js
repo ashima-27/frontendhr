@@ -51,7 +51,7 @@ const ResetPassword = () => {
   useEffect(() => {
     if (ischngeSliceSuccess) {
       toast.success(ischngeSliceSuccessMessage);
-      navigate("/login", { replace: true });
+      navigate("/", { replace: true });
     }
   }, [ischngeSliceSuccess]);
 

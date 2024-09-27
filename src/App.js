@@ -97,6 +97,8 @@ function App() {
                           return 'Blog';
                           case '/admin/sendNoti':
                             return 'Send Notifications';
+                            case '':
+                            return'/';
       default:
         return 'def';
     }
@@ -120,7 +122,7 @@ function App() {
 
  
 
-<div className={`pt-8 mt-5  ${isSidebarVisible || currentRouteName === 'login' || currentRouteName === 'forgetPassword' || currentRouteName === 'resetPassword' ?  '' : 'lg:ml-20 lg:px-5' }`}>
+<div className={`pt-8 mt-5 min-h-screen  ${isSidebarVisible || currentRouteName === 'login' || currentRouteName === 'forgetPassword' || currentRouteName === 'resetPassword' || currentRouteName === 'def' ?  '' : 'lg:ml-20 w-full mx-auto lg:px-5 ' }`}>
 <ApplicationRoutes />
         </div>
       </main>

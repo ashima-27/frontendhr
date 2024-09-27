@@ -45,7 +45,7 @@ export default function Sidebar({ isSidebarVisible }) {
     Cookies.remove("userName");
     dispatch(logout());
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/");
   };
 
   const handleMenuCloseAndLogout = () => {
@@ -123,7 +123,7 @@ export default function Sidebar({ isSidebarVisible }) {
 
         <div className="mt-auto pt-4">
           <NavLinkWithIcon to="/changePassword" icon={LockClosedIcon} label="Change Password" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible} />
-          <NavLinkWithIcon to="/login" icon={LogoutIcon} label="Log out" onClick={() => { setMobileMenuOpen(false); handleLogout(); }} isSidebarVisible={isSidebarVisible}/>
+          <NavLinkWithIcon to="/" icon={LogoutIcon} label="Log out" onClick={() => { setMobileMenuOpen(false); handleLogout(); }} isSidebarVisible={isSidebarVisible}/>
         </div>
       </nav>
 
@@ -147,7 +147,7 @@ export default function Sidebar({ isSidebarVisible }) {
               <NavLinkWithIcon to="/admin/emaildashboard" icon={TemplateIcon} label="Templates" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/admin/recepientDashboard" icon={MailIcon} label="Sent Mails" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/admin/ticketDashboard" icon={TicketIcon} label="Tickets Dashboard" onClick={() => setMobileMenuOpen(false)} />
-              <NavLinkWithIcon to="/admin/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} />
+              <NavLinkWithIcon to="/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/draftDashboard" icon={DocumentDuplicateIcon} label="Draft Dashboard" onClick={() => setMobileMenuOpen(false)} />
          
             </>
@@ -167,7 +167,7 @@ export default function Sidebar({ isSidebarVisible }) {
 
         <div className="bg-white border-t pt-4 pb-2" style={{backgroundColor:'#090a72f7'}}>
           <NavLinkWithIcon to="/changePassword" icon={LockClosedIcon} label="Change Password" onClick={() => setMobileMenuOpen(false)} />
-          <NavLinkWithIcon to="/login" icon={LogoutIcon} label="Log out" onClick={() => { setMobileMenuOpen(false); handleLogout(); }} />
+          <NavLinkWithIcon to="/" icon={LogoutIcon} label="Log out" onClick={() => { setMobileMenuOpen(false); handleLogout(); }} />
        
         </div>
       </Dialog>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Cookies from "js-cookie";
 import moment from 'moment';
 import "react-toastify/dist/ReactToastify.css";
 import ComponentLoader from "../ComponentLoader/ComponentLoader";
@@ -8,11 +9,13 @@ import { RaiseTicket, clearticketSliceStates } from '../../Redux/ticket';
 import useCloudinaryUpload from "../../customHook/useCloudinaryHook";
 import TinyEditor from '../TextEditor/Editor';
 import { useNavigate } from "react-router-dom";
+
 const RaiseTickets = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isticketSliceFetchingSmall, ticketSliceErrorMessage, ticketSliceSuccessMessage, isticketSliceError, isticketSliceSuccess } = useSelector((state) => state.ticket);
   const { uploading, error, url, uploadPdf } = useCloudinaryUpload();
+  
   const [file, setFile] = useState(null);
   const [ticketDetails, setTicketDetails] = useState({
     type: 'leave',
@@ -20,11 +23,18 @@ const RaiseTickets = () => {
     subject: '',
     startDate: '',
     endDate: '',
+    documentUrl: ''
   });
+  
+  const [errors, setErrors] = useState({});
+  const userRole = Cookies.get("role") ? JSON.parse(Cookies.get("role")) : null;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTicketDetails({ ...ticketDetails, [name]: value });
+    
+    // Clear the error for the current field
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
   };
 
   const handleTemplateBodyChange = (content) => {
@@ -55,9 +65,25 @@ const RaiseTickets = () => {
     });
   };
 
+  const validateFields = () => {
+    const newErrors = {};
+    if (!ticketDetails.description) newErrors.description = "Description is required.";
+    if (!ticketDetails.subject) newErrors.subject = "Subject is required.";
+    if (!ticketDetails.startDate) newErrors.startDate = "Start Date is required.";
+    if (!ticketDetails.endDate) newErrors.endDate = "End Date is required.";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("ticet",ticketDetails)
+    if (!validateFields()) {
+     
+      return; 
+    }
+
+    console.log("ticket", ticketDetails);
     dispatch(RaiseTicket(ticketDetails));
     setTicketDetails({
       type: 'leave',
@@ -65,7 +91,7 @@ const RaiseTickets = () => {
       subject: '',
       startDate: '',
       endDate: '',
-      documentUrl:''
+      documentUrl: ''
     });
   };
 
@@ -87,8 +113,11 @@ const RaiseTickets = () => {
 
   useEffect(() => {
     if (isticketSliceSuccess) {
-      
-      navigate("/admin/ticketDashboard", { replace: true });
+      if (userRole === 'admin') {
+        navigate("/admin/ticketDashboard", { replace: true });
+      } else {
+        navigate("/user/ticketDashboard", { replace: true });
+      }
       successToast();
     }
     return () => {
@@ -118,7 +147,7 @@ const RaiseTickets = () => {
                 id="type"
                 name="type"
                 value={ticketDetails.type}
-                style={{backgroundColor:'#eff2f9'}}
+                style={{ backgroundColor: '#eff2f9' }}
                 onChange={handleInputChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
               >
@@ -130,7 +159,8 @@ const RaiseTickets = () => {
             </div>
             <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4">
               <label htmlFor="subject" className="block text-sm font-semibold text-left lg:w-1/3 md:w-full sm:w-full">Subject</label>
-              <input style={{backgroundColor:'#eff2f9'}}
+              <input
+                style={{ backgroundColor: '#eff2f9' }}
                 id="subject"
                 name="subject"
                 value={ticketDetails.subject}
@@ -138,35 +168,38 @@ const RaiseTickets = () => {
                 placeholder="Enter Subject"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm lg:w-2/3 md:w-full sm:w-full"
               />
+              {errors.subject && <p className="text-red-600 text-sm">{errors.subject}</p>}
             </div>
             {(ticketDetails.type === 'leave' || ticketDetails.type === 'emergency') && (
               <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4 justify-between">
                 <div className="lg:w-1/2 md:w-full sm:w-full pr-4">
-                <div className="lg:flex lg:flex-row md:flex-col justify-center items-center sm:flex-col mb-4">
-                  <label htmlFor="startDate" className=" w-full md:w-3/12 block text-sm font-semibold text-left">Start Date</label>
-                  <input
-                  
-                    type="date"
-                    id="startDate"
-                    name="startDate"
-                    value={ticketDetails.startDate}
-                    onChange={handleInputChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm " style={{backgroundColor:'#eff2f9'}}
-                  />
+                  <div className="lg:flex lg:flex-row md:flex-col justify-center items-center sm:flex-col mb-4">
+                    <label htmlFor="startDate" className="w-full md:w-3/12 block text-sm font-semibold text-left">Start Date</label>
+                    <input
+                      type="date"
+                      id="startDate"
+                      name="startDate"
+                      value={ticketDetails.startDate}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      style={{ backgroundColor: '#eff2f9' }}
+                    />
+                    {errors.startDate && <p className="text-red-600 text-sm">{errors.startDate}</p>}
                   </div>
                 </div>
                 <div className="lg:w-1/2 md:w-full sm:w-full">
-                <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4 justify-center items-center">
-                  <label htmlFor="endDate" className="w-full md:w-4/12 block text-sm font-semibold text-left">End Date</label>
-                  <input
-                   style={{backgroundColor:'#eff2f9'}}
-                    type="date"
-                    id="endDate"
-                    name="endDate"
-                    value={ticketDetails.endDate}
-                    onChange={handleInputChange}
-                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
+                  <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4 justify-center items-center">
+                    <label htmlFor="endDate" className="w-full md:w-4/12 block text-sm font-semibold text-left">End Date</label>
+                    <input
+                      style={{ backgroundColor: '#eff2f9' }}
+                      type="date"
+                      id="endDate"
+                      name="endDate"
+                      value={ticketDetails.endDate}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                    {errors.endDate && <p className="text-red-600 text-sm">{errors.endDate}</p>}
                   </div>
                 </div>
               </div>
@@ -229,12 +262,6 @@ const RaiseTickets = () => {
           </form>
         </div>
       </div>
-      
-
-
-
-
-
     </>
   );
 };

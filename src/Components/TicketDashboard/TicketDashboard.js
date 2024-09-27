@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {Link, NavLink} from "react-router-dom"
+import { Link, NavLink } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
   getAllTicket,
@@ -191,37 +191,35 @@ const TicketsDashboard = () => {
   };
   return (
     <>
-    
       <ToastContainer />
       {isticketSliceFetching && <ComponentLoader />}
-      <div className="px-4 py-1">
-      <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg">
-        <Menu
-          options={[
-            { name: "10", id: 10 },
-            { name: "20", id: 20 },
-            { name: "30", id: 30 },
-            { name: "Max", id: totalTicket },
-          ]}
-          searchFunction={searchHandler}
-          clearSearch={clearSearch}
-          isActive={isPerPageDrop}
-          setIsActive={setIsPerPageDrop}
-          onSelect={onChangePerPage}
-          dropName={perPageDropName}
-          startDate={startDate}
-          showing={allTicket.length}
-          total={totalTicket}
-          setStartDate={setStartDate}
-          endDate={endDate}
-          setEndDate={setEndDate}
-          isCreate={true}
-          isCreateLink={"/user/raiseticket"}
-          isCreateName={"Raise Ticket"}
-        />
-      </div>
-      <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg h-full overflow-scroll hide-scrollbar">
-     
+      <div className="px-4 py-1 ">
+        <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg">
+          <Menu
+            options={[
+              { name: "10", id: 10 },
+              { name: "20", id: 20 },
+              { name: "30", id: 30 },
+              { name: "Max", id: totalTicket },
+            ]}
+            searchFunction={searchHandler}
+            clearSearch={clearSearch}
+            isActive={isPerPageDrop}
+            setIsActive={setIsPerPageDrop}
+            onSelect={onChangePerPage}
+            dropName={perPageDropName}
+            startDate={startDate}
+            showing={allTicket.length}
+            total={totalTicket}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            isCreate={true}
+            isCreateLink={"raiseticket"}
+            isCreateName={"Raise Ticket"}
+          />
+        </div>
+        <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg h-full overflow-scroll hide-scrollbar">
           <table className="table-auto border-collapse border border-slate-500 mt-5 w-full">
             <thead>
               <tr>
@@ -229,143 +227,142 @@ const TicketsDashboard = () => {
                 <th className="  p-2">Subject</th>
                 <th className="  p-2">Description</th>
                 <th className="  p-2">Date</th>
-              {isAdmin &&(  <th className="  p-2">Raised By</th> )}
+                {isAdmin && <th className="  p-2">Raised By</th>}
                 <th className="  p-2">Raised On</th>
                 <th className="  p-2">Attachment</th>
-                {!isAdmin && (
-                  <th className="  p-2">Status</th>
-                )}
-                {!isAdmin && (
-                  <th className="  p-2">Actions</th>
-                )}
-                {isAdmin && (
-                  <th className="  p-2">Status</th>
-                )}
+                {!isAdmin && <th className="  p-2">Status</th>}
+                {!isAdmin && <th className="  p-2">Actions</th>}
+                {isAdmin && <th className="  p-2">Status</th>}
               </tr>
             </thead>
             <tbody>
-              {filteredTickets?.map((ticket,index) => (
-                <tr key={ticket.id} style={{ backgroundColor: index % 2 !== 0 ? "#ffffff" : "#eff2f9" }}>
-                
-                      <td className="  p-2">
-                        {ticket.type}
-                      </td>
-                      <td className="  p-2">
-                        {ticket.subject}
-                      </td>
-                      <td className="  p-2">
-                        {" "}
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: ticket.description,
-                          }}
-                        ></span>
-                      </td>
-                      <td className="  p-2">
-                        {new Date(ticket.startDate).toLocaleDateString()} -{" "}
-                        {ticket.endDate
-                          ? new Date(ticket.endDate).toLocaleDateString()
-                          : "N/A"}
-                      </td>
-                   {isAdmin && (   <td>
-
+              {filteredTickets?.map((ticket, index) => (
+                <tr
+                  key={ticket.id}
+                  style={{
+                    backgroundColor: index % 2 !== 0 ? "#ffffff" : "#eff2f9",
+                  }}
+                >
+                  <td className="  p-2">{ticket.type}</td>
+                  <td className="  p-2">{ticket.subject}</td>
+                  <td className="  p-2">
+                    {" "}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: ticket.description,
+                      }}
+                    ></span>
+                  </td>
+                  <td className="  p-2">
+                    {new Date(ticket.startDate).toLocaleDateString()} -{" "}
+                    {ticket.endDate
+                      ? new Date(ticket.endDate).toLocaleDateString()
+                      : "N/A"}
+                  </td>
+                  {isAdmin && (
+                    <td>
                       <div className="text-sm font-medium text-gray-900">
-              <NavLink to={`/admin/empdetails?id=${ticket.employeeId}`}> {ticket?.employeeName}</NavLink>
-              </div>
-              <div className="text-sm text-gray-500"> {ticket?.employeeEmail}</div>
-
-              
-              </td>)}
-              <td className="  p-2">
-                        {new Date(ticket.createdAt).toLocaleDateString()}
-                      
-                      </td>
-                      <td className="  p-2">
+                        <NavLink
+                          to={`/admin/empdetails?id=${ticket.employeeId}`}
+                        >
+                          {" "}
+                          {ticket?.employeeName}
+                        </NavLink>
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {" "}
+                        {ticket?.employeeEmail}
+                      </div>
+                    </td>
+                  )}
+                  <td className="  p-2">
+                    {new Date(ticket.createdAt).toLocaleDateString()}
+                  </td>
+                  
+                    <td className="  p-2">
                       <Link to={ticket?.documentUrl}>
-              <button className="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                View
-              </button>
-            </Link>
-                      </td>
+                        <button className="py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        {ticket?.documentUrl ? ' View ' :' N/A'}
+                        </button>
+                      </Link>
+                    </td>
+                  
 
-                      {!isAdmin && (
-                        <td className=" p-2 "  >
-                       <span style={getStatusStyle(ticket.status)} className='p-2'>  {ticket.status ? ticket.status : "Pending"} </span> 
-                        </td>
-                      )}
-                      {!isAdmin && (
-                        <td className="border   px-4 py-2">
-                          <DropActions
-                            heading={
-                              <svg
-                                className="w-5 h-5"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor"
-                                viewBox="0 0 16 3"
-                              >
-                                <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-                              </svg>
-                            }
-                            options={[
-                              // { name: "Edit",   onClick: () => handleEdit(ticket), },
-                              {
-                                name: "Delete",
-                                onClick: () => handleDelete(ticket._id),
-                              },
-                            ]}
-                          />
-                        </td>
-                      )}
-                      {isAdmin && (
-                        <td className="border   px-4 py-2">
-                          <DropActions
-                            heading={ticket.status ? ticket.status : "Pending"}
-                             style={getStatusStyle(ticket.status)}
-                            options={[
-                              {
-                                name: "Approved",
-                                onClick: () =>
-                                  handleStatus(ticket._id, "Approved"),
-                              },
-                              {
-                                name: "Pending",
-                                onClick: () =>
-                                  handleStatus(ticket._id, "Pending"),
-                              },
-                              {
-                                name: "Rejected",
-                                onClick: () =>
-                                  handleStatus(ticket._id, "Rejected"),
-                              },
-                            ]}
-                          />
-                        </td>
-                      )}
-                
+                  {!isAdmin && (
+                    <td className=" p-2 ">
+                      <span
+                        style={getStatusStyle(ticket.status)}
+                        className="p-2"
+                      >
+                        {" "}
+                        {ticket.status ? ticket.status : "Pending"}{" "}
+                      </span>
+                    </td>
+                  )}
+                  {!isAdmin && (
+                    <td className="border   px-4 py-2">
+                      <DropActions
+                        heading={
+                          <svg
+                            className="w-5 h-5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            viewBox="0 0 16 3"
+                          >
+                            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+                          </svg>
+                        }
+                        options={[
+                          // { name: "Edit",   onClick: () => handleEdit(ticket), },
+                          {
+                            name: "Delete",
+                            onClick: () => handleDelete(ticket._id),
+                          },
+                        ]}
+                      />
+                    </td>
+                  )}
+                  {isAdmin && (
+                    <td className="border  px-4 py-2">
+                      <DropActions
+                        heading={ticket.status ? ticket.status : "Pending"}
+                        style={getStatusStyle(ticket.status)}
+                        options={[
+                          {
+                            name: "Approved",
+                            onClick: () => handleStatus(ticket._id, "Approved"),
+                          },
+                          {
+                            name: "Pending",
+                            onClick: () => handleStatus(ticket._id, "Pending"),
+                          },
+                          {
+                            name: "Rejected",
+                            onClick: () => handleStatus(ticket._id, "Rejected"),
+                          },
+                        ]}
+                      />
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>
           </table>
           {filteredTickets.length === 0 && (
-            
-              <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
-          <img src={notFound} alt="notFound" className="w-50 h-auto"/>
-          <p className='text-md m-0 p-0 font-semibold'>Data Not Found !</p>
-          </div>
-            
+            <div className="flex flex-col w-full gap-2 justify-center items-center min-h-screen ">
+              <img src={notFound} alt="notFound" className="w-50 h-auto" />
+              <p className="text-md m-0 p-0 font-semibold">Data Not Found !</p>
+            </div>
           )}
-      
+        </div>
+        <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg flex  justify-center">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
+        </div>
       </div>
-      <div className="max-w-7xl mx-auto p-4 m-4 mb-6 bg-white shadow-md rounded-lg flex  justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
-        />
-      </div>
-
-      </div>
-
     </>
   );
 };

@@ -1,27 +1,19 @@
-import React, { lazy, useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import { useLocation, useRoutes } from "react-router-dom";
 import usePageTitle from "./pagetitle";
-import MainRoute from "./MainRoutes";
-
-
+import MainRoutes from "./MainRoutes";
+import ComponentLoader from "../Components/ComponentLoader/ComponentLoader"; 
 
 export default function ApplicationRoutes() {
-  const routes = useRoutes([...MainRoute]);
-  const {pathname} = useLocation()
-  usePageTitle(" Infinity HR")
+  const routes = useRoutes(MainRoutes);
+  const { pathname } = useLocation();
 
-  useEffect(() => {
-    
-  }, []);
+  usePageTitle("Infinity HR");
+
+
   return (
-  
-    <div className="App">
-      {routes}
-    </div>
+    <Suspense fallback={<ComponentLoader />}>
+      <div className="App">{routes}</div>
+    </Suspense>
   );
 }
-
-
-
-
-

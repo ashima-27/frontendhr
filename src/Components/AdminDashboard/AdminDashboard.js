@@ -168,8 +168,8 @@ const AdminDashboard = () => {
   return (
 
     // <div className="container m-auto py-5 h-auto">
-    <div className="p-6 flex justify-center items-start space-y-8">
-        <div className="bg-white shadow-2xl rounded-lg p-8 w-full max-w-7xl space-y-4">
+    <div className="p-6 flex justify-center items-center w-full mx-auto ">
+        <div className="bg-white shadow-2xl rounded-lg p-8 w-11/12 justify-center items-center mx-auto ">
         
       <ToastContainer />
     {isemployeeSliceFetching && <ComponentLoader />}
@@ -189,7 +189,7 @@ const AdminDashboard = () => {
           title={"Change Status"}
         />
       )}
-      <div className="flex flex-col gap-4 m-4 md:grid md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex flex-col w-full gap-4 m-4 md:grid md:grid-cols-2 lg:grid-cols-4 mx-auto">
         <SideCard
           desc={"Total Employees"}
           count={totalEmployee}
@@ -240,7 +240,7 @@ const AdminDashboard = () => {
         isCsv={true}
       />
       {viewMode === "card" ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           {allEmployee?.map((employee, index) => (
             <SimpleCard
               key={index}
@@ -294,7 +294,7 @@ const AdminDashboard = () => {
       <button
             id="dropdownButton"
             data-dropdown-toggle="dropdown"
-            className="inline-block  bg-blue-500 text-gray-500 dark:text-white-400 hover:bg-blue-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+            className="inline-block  bg-blue-500 text-gray-500 dark:text-white-400 hover:bg-blue-100 dark:hover:bg-gray-700  focus:outline-none dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
             type="button"
             onClick={()=>loadMore()}
           >Load More</button>

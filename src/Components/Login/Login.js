@@ -94,10 +94,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full mx-auto bg-[#eff2f9]">
+    <div className="flex flex-col justify-center items-center w-full bg-[#eff2f9]">
       <div className="flex flex-col justify-center items-center w-11/12 mx-auto bg-[#eff2f9]">
         <ToastContainer />
-        <div className="bg-white flex flex-col justify-center items-center shadow-2xl rounded-lg p-6 lg:w-4/12 gap-2 m-4 z-[10]">
+        <div className="bg-white flex flex-col justify-center items-center shadow-2xl rounded-lg p-6 w-11/12 md:w-6/12  lg:w-4/12 gap-2 m-4 z-[10]">
           <img
             src={logo}
             alt="logo"
@@ -180,7 +180,7 @@ const Login = () => {
         </div>
       </div>
       
-      <div className="w-full fixed bottom-0 bg-[#eff2f9] ">
+      <div className="w-full fixed bottom-0  bg-[#eff2f9] ">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
             fill="#0099ff"
