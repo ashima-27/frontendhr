@@ -1,13 +1,16 @@
 import React from "react";
 
-const TemplatePreview =({template,onClose})=>{
-    return (
-        <>
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded shadow-lg">
-      <button
+const TemplatePreview = ({ template, onClose }) => {
+  return (
+    <>
+       <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50 ">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 mx-auto">
+        <div className='flex flex-row justify-between items-center w-full'>
+         <h2 className="text-md md:text-2xl font-bold mb-4">Preview Template</h2>
+        
+         <button
                 onClick={onClose}
-                className="ml-auto bg-transparent border-none text-gray-500 hover:text-gray-700 focus:outline-none"
+                className="ml-auto font-bold bg-transparent border-none text-black hover:text-gray-700 focus:outline-none"
               >
                 <svg
                   className="w-6 h-6"
@@ -22,16 +25,19 @@ const TemplatePreview =({template,onClose})=>{
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
-              </button>
-      <h4>{template.description}</h4>
-         {/* <h2>{template.placeholder}</h2> */}
-         <div dangerouslySetInnerHTML={{
-                            __html: template.template,
-                          }}></div>
-       </div>
-       </div>
-        </>
-    )
-}
+              </button></div>
+      
+          <div
+
+          className="w-full h-96 overflow-scroll"
+            dangerouslySetInnerHTML={{
+              __html: template.template,
+            }}
+          ></div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default TemplatePreview;

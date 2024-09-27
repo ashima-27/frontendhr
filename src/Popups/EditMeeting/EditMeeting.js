@@ -38,9 +38,29 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded shadow-lg">
-        <h2 className="text-2xl mb-4">Edit Meeting</h2>
+    <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50 ">
+    <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 mx-auto">
+    <div className='flex flex-row justify-between items-center w-full'>
+     <h2 className="text-md md:text-2xl font-bold mb-4">Edit Meeting</h2>
+    
+     <button
+            onClick={onClose}
+            className="ml-auto font-bold bg-transparent border-none text-black hover:text-gray-700 focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button></div>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -48,7 +68,7 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
             onSave(meetingDetails);
           }}
         >
-          <label className="block mb-2">
+          <label className="block text-left mb-2">
             Title:
             <input
               type="text"
@@ -59,7 +79,7 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
               className="w-full p-2 border rounded"
             />
           </label>
-          <label className="block mb-2">
+          <label className="block text-left mb-2">
             Start Time:
             <input
               type="time"
@@ -69,7 +89,7 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
               className="w-full p-2 border rounded"
             />
           </label>
-          <label className="block mb-2">
+          <label className="block text-left mb-2">
             End Time:
             <input
               type="time"
@@ -79,7 +99,7 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
               className="w-full p-2 border rounded"
             />
           </label>
-          <label className="block mb-2">
+          <label className="block text-left mb-2">
             Link:
             <input
               type="text"
@@ -89,7 +109,7 @@ const EditMeetModal = ({ isOpen, onClose, meeting, onSave ,ismeetingSliceFetchin
               className="w-full p-2 border rounded"
             />
           </label>
-          <label className="block mb-2">
+          <label className="block text-left mb-2">
             Date:
             <input
               type="date"

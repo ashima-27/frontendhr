@@ -61,7 +61,7 @@ const SendEmailComponent = () => {
           senderName,
           fromEmail,
        
-          ...employee.empdata,  // Spread the employee data
+          ...employee.empdata,  
         }),
         recipientEmail: employee.value,
         subject:selectedTemplate.label,
@@ -69,7 +69,7 @@ const SendEmailComponent = () => {
         templateId: selectedTemplate.value // Include template id
       };
       console.log('Sending email with the following data:', emailData);
-      // Implement your email sending logic here
+     
       dispatch(sendTemplate(emailData))
       setSelectedEmployees('');
       setSelectedTemplate('');
@@ -111,7 +111,7 @@ const SendEmailComponent = () => {
       const templateContent = replacePlaceholders(selectedTemplate.content, {
         senderName,
         fromEmail,
-        // Optionally, add mock employee data for preview if needed
+      
       });
       return (
         <div dangerouslySetInnerHTML={{ __html: templateContent }}></div>

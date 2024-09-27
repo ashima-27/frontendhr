@@ -38,7 +38,7 @@ const EditTemplate = ({template,onClose,onEdit}) => {
  onEdit(templateDetails);
     setTemplateDetails({
         title: '',
-        placeholder: '',
+       
         status: '',
         description: '',
         template:'',
@@ -78,7 +78,7 @@ const EditTemplate = ({template,onClose,onEdit}) => {
                   />
                 </svg>
               </button></div>
-      <form  className="overflow-y-scroll h-72 w-full">
+      <form  className="overflow-y-scroll h-96 w-full">
         <div className="lg:flex lg:space-x-4">
           <div className="lg:w-1/2">
             <label htmlFor="title" className="block text-sm text-left font-semiboldtext-gray-700">
@@ -136,6 +136,7 @@ const EditTemplate = ({template,onClose,onEdit}) => {
              PlaceHolder
             </label>
             <textarea
+            readOnly
               id="placeholder"
               name="placeholder"
               type="text"
