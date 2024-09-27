@@ -56,11 +56,13 @@ const EditTemplate = ({template,onClose,onEdit}) => {
    
     <><ToastContainer />
     <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50 ">
-        <div className="bg-white p-6 rounded-lg shadow-lg m-5">
-         <h2 className="text-2xl font-bold mb-4">Edit {templateDetails.title} Template</h2>
+        <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 mx-auto">
+        <div className='flex flex-row justify-between items-center w-full'>
+         <h2 className="text-md md:text-2xl font-bold mb-4">Edit {templateDetails.title} Template</h2>
+        
          <button
                 onClick={onClose}
-                className="ml-auto bg-transparent border-none text-gray-500 hover:text-gray-700 focus:outline-none"
+                className="ml-auto font-bold bg-transparent border-none text-black hover:text-gray-700 focus:outline-none"
               >
                 <svg
                   className="w-6 h-6"
@@ -75,8 +77,8 @@ const EditTemplate = ({template,onClose,onEdit}) => {
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
-              </button>
-      <form onSubmit={handleFormSubmit} className="space-y-4">
+              </button></div>
+      <form  className="overflow-y-scroll h-72 w-full">
         <div className="lg:flex lg:space-x-4">
           <div className="lg:w-1/2">
             <label htmlFor="title" className="block text-sm text-left font-semiboldtext-gray-700">
@@ -158,7 +160,9 @@ const EditTemplate = ({template,onClose,onEdit}) => {
           <small  className=' flex text-left text-gray-500'>This design will show in recieved email and place holders will replace with dynamic content.</small>
         </div>
 
-        <div className="flex justify-end">
+       
+      </form>
+      <div className="flex flex-col sm:flex-row gap-2 mt-2 pt-4 justify-center md:justify-end w-full">
         <button
                     type="button"
                     onClick={onClose}
@@ -167,13 +171,13 @@ const EditTemplate = ({template,onClose,onEdit}) => {
                     Cancel
                   </button>
           <button
+          onClick={handleFormSubmit}
             type="submit"
-            className="py-2 px-4 border border-transparent text-sm text-left font-semiboldrounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="py-2 px-4 border border-transparent text-sm text-center font-semibold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Submit
           </button>
         </div>
-      </form>
     </div>
     </div>
     </>

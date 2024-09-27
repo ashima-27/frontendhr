@@ -71,9 +71,9 @@ function App() {
         return 'All Notification';
        case '/changePassword':
          return 'Change Password';
-       case '/user/raiseticket':
+       case '/raiseticket':
         return 'Raise Ticket';
-        case '/admin/raiseticket':
+        case '/raiseticket':
         return 'Raise Ticket';
         case '/admin/sendEmail':
           return 'Send Emails';
