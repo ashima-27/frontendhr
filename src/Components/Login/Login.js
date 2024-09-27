@@ -28,7 +28,7 @@ const Login = () => {
   });
 
   const [errors, setErrors] = useState({ email: "", password: "" });
-  const [passwordVisible, setPasswordVisible] = useState(false); // State to toggle password visibility
+  const [passwordVisible, setPasswordVisible] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -239,10 +239,10 @@ const TemplateDashboard = () => {
             {alltemplate.map((template,index) => (
               <tr key={template.id} style={{ backgroundColor: index % 2 !== 0 ? "#ffffff" : "#eff2f9" }}>
                 <>
-                  <td className="   p-2">
+                  <td className="  capitalize  p-2">
                     {template.title}
                   </td>
-                  <td className="   p-2">
+                  <td className="  capitalize  p-2">
                   <span style={getStatusStyle(template.status)} className="p-2" >
                       {" "}
                       {template.status ? "Active" : "InActive"}
@@ -253,7 +253,7 @@ const TemplateDashboard = () => {
                     {new Date(template.createdAt).toLocaleDateString()}
                   </td>
 
-                  <td className="   p-2">
+                  <td className="  capitalize  p-2">
                     <div className="text-sm font-medium text-gray-900">
                       {template?.createdBy?.name}
                     </div>

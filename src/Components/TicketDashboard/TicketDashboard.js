@@ -214,8 +214,8 @@ const TicketsDashboard = () => {
             setStartDate={setStartDate}
             endDate={endDate}
             setEndDate={setEndDate}
-            isCreate={true}
-            isCreateLink={"/raiseticket"}
+            isCreate={isAdmin ? false :true}
+            isCreateLink={"raiseticket"}
             isCreateName={"Raise Ticket"}
           />
         </div>
@@ -243,9 +243,9 @@ const TicketsDashboard = () => {
                     backgroundColor: index % 2 !== 0 ? "#ffffff" : "#eff2f9",
                   }}
                 >
-                  <td className="  p-2">{ticket.type}</td>
-                  <td className="  p-2">{ticket.subject}</td>
-                  <td className="  p-2">
+                  <td className=" capitalize p-2">{ticket.type}</td>
+                  <td className=" capitalize p-2">{ticket.subject}</td>
+                  <td className="  capitalize p-2">
                     {" "}
                     <span
                       dangerouslySetInnerHTML={{
@@ -261,7 +261,7 @@ const TicketsDashboard = () => {
                   </td>
                   {isAdmin && (
                     <td>
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm  capitalize font-medium text-gray-900">
                         <NavLink
                           to={`/admin/empdetails?id=${ticket.employeeId}`}
                         >
