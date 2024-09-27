@@ -55,7 +55,7 @@ function App() {
         return 'Dashboard';
       case '/admin/notification':
         return 'Send Notification';
-      case '/admin/scheduleMeet':
+      case '/scheduleMeet':
         return 'Schedule Meeting';
       case '/admin/emaildashboard':
         return 'Templates';

@@ -49,14 +49,7 @@ const AdminRoutes = [
       </PrivateRoute>
     ),
   },
-  {
-    path: "/admin/scheduleMeet",
-    element: (
-      <PrivateRoute requiredRole="admin">
-        <MeetingScheduler />
-      </PrivateRoute>
-    ),
-  },
+ 
   {
     path: "/admin/ticketDashboard",
     element: (
@@ -149,6 +142,7 @@ const UserRoutes = [
       </PrivateRoute>
     ),
   },
+ 
   
 ];
 
@@ -160,7 +154,15 @@ const MainRoutes = [
   { path: "/blog", element: <BlogDetail /> },
   { path: "/draftDashboard", element: <BlogDraft /> },
   { path: "/blogDashboard", element: <BlogDashboard /> },
-  {    path: "/raiseticket", element:       <RaiseTickets />   
+  {    path: "/raiseticket", element: <RaiseTickets />   
+  },
+  {
+    path: "/scheduleMeet",
+    element: (
+     
+        <MeetingScheduler />
+     
+    ),
   },
   ...AdminRoutes,
   ...UserRoutes,

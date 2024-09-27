@@ -99,7 +99,7 @@ export default function Sidebar({ isSidebarVisible }) {
             <>
               <NavLinkWithIcon to="/admin" icon={UserCircleIcon} label="Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/admin/notification" icon={ClipboardCheckIcon} label="Send Notification" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
-              <NavLinkWithIcon to="/admin/scheduleMeet" icon={CalendarIcon} label="Schedule Meeting" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+              <NavLinkWithIcon to="/scheduleMeet" icon={CalendarIcon} label="Schedule Meeting" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/admin/emaildashboard" icon={TemplateIcon} label="Templates" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/admin/recepientDashboard" icon={MailIcon} label="Sent Mails" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible} />
               <NavLinkWithIcon to="/admin/ticketDashboard" icon={TicketIcon} label="Tickets Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
@@ -113,7 +113,7 @@ export default function Sidebar({ isSidebarVisible }) {
               <NavLinkWithIcon to="/user" icon={UserCircleIcon} label="Profile" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/user/ticketDashboard" icon={TicketIcon} label="Ticket Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
               <NavLinkWithIcon to="/user/notification" icon={ClipboardCheckIcon} label="Notification" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
-              <NavLinkWithIcon to="/admin/scheduleMeet" icon={CalendarIcon} label="My Meetings" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
+              <NavLinkWithIcon to="/scheduleMeet" icon={CalendarIcon} label="My Meetings" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
           
               <NavLinkWithIcon to="/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} isSidebarVisible={isSidebarVisible}/>
             
@@ -143,7 +143,7 @@ export default function Sidebar({ isSidebarVisible }) {
             <>
               <NavLinkWithIcon to="/admin" icon={UserCircleIcon} label="Dashboard" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/admin/notification" icon={ClipboardCheckIcon} label="Send Notification" onClick={() => setMobileMenuOpen(false)} />
-              <NavLinkWithIcon to="/admin/scheduleMeet" icon={CalendarIcon} label="Schedule Meeting" onClick={() => setMobileMenuOpen(false)} />
+              <NavLinkWithIcon to="/scheduleMeet" icon={CalendarIcon} label="Schedule Meeting" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/admin/emaildashboard" icon={TemplateIcon} label="Templates" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/admin/recepientDashboard" icon={MailIcon} label="Sent Mails" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/admin/ticketDashboard" icon={TicketIcon} label="Tickets Dashboard" onClick={() => setMobileMenuOpen(false)} />
@@ -157,7 +157,7 @@ export default function Sidebar({ isSidebarVisible }) {
               <NavLinkWithIcon to="/user" icon={UserCircleIcon} label="Profile" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/user/ticketDashboard" icon={TicketIcon} label="Ticket Dashboard" onClick={() => setMobileMenuOpen(false)} />
               <NavLinkWithIcon to="/user/notification" icon={ClipboardCheckIcon} label="Notification" onClick={() => setMobileMenuOpen(false)} />
-              <NavLinkWithIcon to="/admin/scheduleMeet" icon={CalendarIcon} label="My Meetings" onClick={() => setMobileMenuOpen(false)} />
+              <NavLinkWithIcon to="/scheduleMeet" icon={CalendarIcon} label="My Meetings" onClick={() => setMobileMenuOpen(false)} />
           
               <NavLinkWithIcon to="/blogDashboard" icon={NewspaperIcon} label="Blog Dashboard" onClick={() => setMobileMenuOpen(false)} />
             
