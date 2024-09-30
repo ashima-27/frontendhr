@@ -91,9 +91,9 @@ const EditBlog = ({ blogDetail, onCancel, onSubmit }) => {
   return (
     <>
       <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50 p-4 sm:p-8">
-        <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
+        <div className="bg-white p-4 rounded-lg shadow-lg w-full max-w-11/12 mx-auto ">
           <h2 className="text-xl font-bold bg-gray-200 px-3 py-2 rounded-t-lg">Edit Blog</h2>
-          <form onSubmit={handleSubmit} className="px-4 py-2 space-y-4">
+          <form className="px-4 py-2 space-y-4 overflow-x-scroll h-96 hide-scrollbar ">
             <div className="space-y-4 sm:flex sm:space-x-2 sm:space-y-0">
               <div className="flex-1 flex flex-col">
                 <label htmlFor="blog_Title" className="text-sm font-semibold">Blog Title</label>
@@ -187,7 +187,9 @@ const EditBlog = ({ blogDetail, onCancel, onSubmit }) => {
               />
             </div>
 
-            <div className="flex items-center justify-end space-x-2">
+            
+          </form>
+          <div className="flex items-center justify-end space-x-2">
               <button
                 onClick={onCancel}
                 className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
@@ -196,12 +198,12 @@ const EditBlog = ({ blogDetail, onCancel, onSubmit }) => {
               </button>
               <button
                 type="submit"
+                onClick={handleSubmit} 
                 className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
               >
                 Edit Blog
               </button>
             </div>
-          </form>
         </div>
       </div>
     </>

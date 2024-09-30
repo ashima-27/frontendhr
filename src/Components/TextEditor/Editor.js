@@ -11,7 +11,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
     setWordCount(words);
     console.log("content", content);
     onChange(content, words); 
-    autoResize(); 
+    // autoResize(); 
   };
 
 
@@ -32,7 +32,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
       const file = this.files[0];
       const reader = new FileReader();
       reader.onload = function () {
-        const base64 = reader.result; // Convert the file to a base64 string
+        const base64 = reader.result; 
         callback(base64, {
           text: file.name,
         });
@@ -49,7 +49,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
         initialValue={initialValue}
         apiKey="4rs3lod2vbvloy4besjpvz4p2gtkvr38oe2gtmg8akgb8is6"
         init={{
-          height: 200,
+          height: 400,
           menubar: "file edit insert view format table tools help",
           plugins: [
             "advlist",

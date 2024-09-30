@@ -123,6 +123,9 @@ const CreateBlog = () => {
         
         
   }
+  useEffect(()=>{
+    console.log("fom",formData)
+  },[formData])
 
   useEffect(() => {
     if (location.state && location.state.draftData) {
@@ -180,9 +183,9 @@ const CreateBlog = () => {
 
       <div className="lg:flex lg:flex-row md:flex-col sm:flex-col mb-4">
             
-        <label htmlFor="image" className="block text-sm font-semibold text-left lg:w-1/3 md:w-full sm:w-full">Image URL</label>
+        <label htmlFor="image" className="block text-sm font-semibold text-left lg:w-2/3 md:w-full sm:w-full">Image URL</label>
        <> 
-  <div className="w-1/2">
+  <div className="w-full md:w-1/2">
     <input
       type="file"
       accept="image/*"
@@ -190,7 +193,7 @@ const CreateBlog = () => {
       className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
     />
   </div>
-  <div className="w-1/4 flex items-center justify-center">
+  <div className="w-full md:w-1/4 flex items-center justify-center">
     {formData.image && (
       <img
         className="w-20 h-10 border border-indigo-600"
@@ -200,7 +203,7 @@ const CreateBlog = () => {
       />
     )}
   </div>
-  <div className="w-1/4">
+  <div className="w-full md:w-1/4">
     <button
       onClick={handleImageUpload}
       disabled={!img || imageUploading}
