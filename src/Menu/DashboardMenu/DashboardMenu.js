@@ -94,7 +94,7 @@ const Menu = ({
               dark:bg-gray-700 dark:border-gray-600 focus:outline-none
               dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
               dark:focus:border-blue-500"
-                placeholder="Search Employee..."
+                placeholder="Search ..."
                 value={searchValue}
                 onChange={handleSearchChange}
                 onKeyDown={handleSearchKeyDown}
@@ -117,7 +117,7 @@ const Menu = ({
         </div>
 
         <div className="flex flex-col sm:flex-row  justify-end md:justify-end items-end gap-2 w-full md:w-8/12">
-        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-6/12 justify-center items-center">
+        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-6/12 justify-center md:justify-end items-center">
           {isAdmin && (
             <div className="w-full sm:w-6/12 flex md:justify-end justify-center ">
             <button
