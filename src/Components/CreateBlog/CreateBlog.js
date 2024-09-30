@@ -7,8 +7,10 @@ import {
     createBlog,createBlogAsDraft
 } from "../../Redux/blog"
 import useCloudinaryUpload from "../../customHook/useCloudinaryHook";
+import { useNavigate } from "react-router-dom";
 const CreateBlog = () => {
   const location = useLocation();
+  const navigate=useNavigate();
     const [img, setImage] = useState(null);
     const[makeDraft,setMakeDraft]=useState(false);
     const dispatch = useDispatch();
@@ -60,11 +62,18 @@ const CreateBlog = () => {
   };
 
  
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission logic (e.g., API call)
-    console.log(formData); // Replace with actual submission logic
-    dispatch(createBlog(formData))
+    
+    console.log(formData); 
+   
+    try {
+     
+      await dispatch(createBlog(formData)).unwrap(); 
+      navigate('/blogDashboard');
+    } catch (error) {
+      toast.error("Error creating blog:", error);
+    }
   };
   const handleTemplateBodyChange = (content,words) => {
      console.log("word",words)
@@ -87,7 +96,7 @@ const CreateBlog = () => {
 
   };
 
-  const saveAsDraft=()=>{
+  const saveAsDraft= async()=>{
         // setSavingDraft(true); 
         console.log("formData.blog_Title:", formData);
         let newObj = {
@@ -103,7 +112,15 @@ const CreateBlog = () => {
         };
         console.log(newObj);
         console.log("Draft added!", newObj);
-        dispatch(createBlogAsDraft(newObj))
+      
+        try {
+     
+          await  dispatch(createBlogAsDraft(newObj)).unwrap(); 
+          navigate('/draftDashboard');
+        } catch (error) {
+          toast.error("Error creating draft:", error);
+        }
+        
         
   }
 
