@@ -47,7 +47,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={initialValue}
-        apiKey="bfrk76i1ue7cnr7zhf5oa08cxxuzy2kpp44yals0fke93e3p"
+        apiKey="4rs3lod2vbvloy4besjpvz4p2gtkvr38oe2gtmg8akgb8is6"
         init={{
           height: 200,
           menubar: "file edit insert view format table tools help",
