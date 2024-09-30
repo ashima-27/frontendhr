@@ -18,7 +18,7 @@ const setTokenValues = () => {
   officialEmail = data.user.officialEmail;
 };
 
-// get login data for change Password functionality
+
 const getTokenValues = () => {
   const data = Cookies.get('loginData')
   ? JSON.parse(Cookies.get('loginData'))

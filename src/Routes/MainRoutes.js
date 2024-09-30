@@ -1,7 +1,7 @@
 import React, { lazy } from "react";
 import PrivateRoute from "./PrivateRoute";
 
-// Lazy load all components
+
 const AdminDashboard = lazy(() => import("../Components/AdminDashboard/AdminDashboard"));
 const EmployeeForm = lazy(() => import("../Popups/AddEmployee/AddEmployee"));
 const SendNotification = lazy(() => import("../Components/SendNotification/SendNotification"));
@@ -148,20 +148,31 @@ const UserRoutes = [
 
 const MainRoutes = [
   { path: "/", element: <Login /> },
-  { path: "/changePassword", element: <ChangePassword /> },
+  { path: "/changePassword", element: ( <PrivateRoute requiredRole={['user', 'admin']}> <ChangePassword /> </PrivateRoute>)},
   { path: "/forgetPassword", element: <ForgotPassword /> },
   { path: "/resetPassword", element: <ResetPassword /> },
-  { path: "/blog", element: <BlogDetail /> },
-  { path: "/draftDashboard", element: <BlogDraft /> },
-  { path: "/blogDashboard", element: <BlogDashboard /> },
-  {    path: "/raiseticket", element: <RaiseTickets />   
-  },
+  { path: "/blog", element:( <PrivateRoute requiredRole={['user', 'admin']}><BlogDetail /> </PrivateRoute>)},
+ 
+  { path: "/draftDashboard", element: (
+    <PrivateRoute requiredRole={['user', 'admin']}>
+      <BlogDraft />
+    </PrivateRoute>
+  ) },
+  { path: "/blogDashboard", element: (
+    <PrivateRoute requiredRole={['user', 'admin']}>
+      <BlogDashboard />
+    </PrivateRoute>
+  ) },
+  { path: "/raiseticket", element: (
+    <PrivateRoute requiredRole={['user', 'admin']}>
+      <RaiseTickets />
+    </PrivateRoute>
+  ) },
   {
-    path: "/scheduleMeet",
-    element: (
-     
+    path: "/scheduleMeet", element: (
+      <PrivateRoute requiredRole={['user', 'admin']}>
         <MeetingScheduler />
-     
+      </PrivateRoute>
     ),
   },
   ...AdminRoutes,
