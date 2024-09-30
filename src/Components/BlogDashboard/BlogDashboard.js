@@ -121,7 +121,7 @@ setDuplicate(true)
    
     console.log("dplicate..",)
      dispatch(updateBlog(emp))
-    setDuplicate(false);
+    setEditForm(false);
   }
   const searchHandler = (searchValue) => {
     const keywords = searchValue?.split(",")?.map((keyword) => keyword.trim());

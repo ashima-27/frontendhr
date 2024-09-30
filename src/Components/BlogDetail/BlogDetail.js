@@ -36,7 +36,7 @@ console.log("cd",blogDetail.user && blogDetail?.user[0]?.name)
         <img
           src={blogDetail?.image}
           alt={blogDetail?.blog_Title}
-          className="w-full h-auto object-cover rounded-md shadow-md mb-6"
+          className="w-full h-56 object-cover rounded-md shadow-md mb-6"
         />
         <div
           className="flex items-center mt-3 justify-center"

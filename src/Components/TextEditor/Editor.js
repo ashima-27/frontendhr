@@ -14,7 +14,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
     autoResize(); 
   };
 
-  // Auto-resize function
+
   const autoResize = () => {
     if (editorRef.current) {
       const editor = editorRef.current;
@@ -23,7 +23,7 @@ const TinyEditor = ({ onChange, initialValue, isError, erroMessage }) => {
     }
   };
 
-  // File picker callback function
+  
   const filePickerCallback = (callback, value, meta) => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");

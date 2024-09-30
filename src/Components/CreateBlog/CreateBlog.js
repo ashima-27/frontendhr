@@ -7,7 +7,7 @@ import {
     createBlog,createBlogAsDraft
 } from "../../Redux/blog"
 import useCloudinaryUpload from "../../customHook/useCloudinaryHook";
-import { useNavigate } from "react-router-dom";
+import { toast,ToastContainer } from "react-toastify";
 const CreateBlog = () => {
   const location = useLocation();
   const navigate=useNavigate();
@@ -144,6 +144,7 @@ const CreateBlog = () => {
   }, [location.state]);
  return (
     <div className="p-6 flex justify-center items-start space-y-8">
+    <ToastContainer/>
     <div className="bg-white shadow-2xl rounded-lg p-8 w-full max-w-7xl space-y-4">
       <h2 className="text-2xl font-bold mb-4">Create a New Blog</h2>
   <form className="mb-4 space-y-4">
